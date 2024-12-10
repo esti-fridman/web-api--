@@ -1,0 +1,13 @@
+Dotnet new classlib -n name // add new library
+dotnet add reference 'path' // add refernce from one project to another
+dotnet add reference '..\example'
+
+cd .. // go to parent folder
+
+
+JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(filePath)) //from string to object
+JsonSerializer.Serialize(object) // from object to string
+
+     app.UseDefaultFiles();
+            app.UseStaticFiles();
+            /*js (remove "launchUrl" from Properties\launchSettings.json*/

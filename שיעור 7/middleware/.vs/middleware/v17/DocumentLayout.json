@@ -1,0 +1,113 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|l:\\webapi\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\middlewares\\requestculturemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|solutionrelative:middleware\\middlewares\\requestculturemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|l:\\webapi\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|solutionrelative:middleware\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|l:\\webapi\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|solutionrelative:middleware\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|l:\\webapi\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\middleware.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|solutionrelative:middleware\\middleware.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|l:\\webapi\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{71001258-68D2-480F-B3CC-90802656234F}|middleware\\middleware.csproj|solutionrelative:middleware\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RequestCultureMiddleware.cs",
+              "DocumentMoniker": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Middlewares\\RequestCultureMiddleware.cs",
+              "RelativeDocumentMoniker": "middleware\\Middlewares\\RequestCultureMiddleware.cs",
+              "ToolTip": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Middlewares\\RequestCultureMiddleware.cs",
+              "RelativeToolTip": "middleware\\Middlewares\\RequestCultureMiddleware.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwA4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T07:57:08.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "middleware",
+              "DocumentMoniker": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\middleware.csproj",
+              "RelativeDocumentMoniker": "middleware\\middleware.csproj",
+              "ToolTip": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\middleware.csproj",
+              "RelativeToolTip": "middleware\\middleware.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-10T07:56:05.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "middleware\\Properties\\launchSettings.json",
+              "ToolTip": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Properties\\launchSettings.json",
+              "RelativeToolTip": "middleware\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-10T07:17:35.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "middleware\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "middleware\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBkAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T07:13:28.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Program.cs",
+              "RelativeDocumentMoniker": "middleware\\Program.cs",
+              "ToolTip": "L:\\webAPI\\\u05E9\u05D9\u05E2\u05D5\u05E8 7\\middleware\\middleware\\Program.cs",
+              "RelativeToolTip": "middleware\\Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAIwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T07:04:16.86Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

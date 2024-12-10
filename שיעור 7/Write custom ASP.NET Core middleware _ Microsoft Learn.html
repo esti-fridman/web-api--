@@ -1,0 +1,2711 @@
+<!DOCTYPE html>
+<!-- saved from url=(0095)https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0 -->
+<html class="hasSidebar hasPageActions hasBreadcrumb conceptual has-default-focus theme-light" lang="en-us" dir="ltr" data-css-variable-support="true" data-authenticated="false" data-auth-status-determined="true" data-target="docs" x-ms-format-detection="none"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:title" content="Write custom ASP.NET Core middleware">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0">
+			<meta property="og:description" content="Learn how to write custom ASP.NET Core middleware.">
+
+	<meta property="og:image" content="https://learn.microsoft.com/dotnet/media/dotnet-logo.png">
+
+	<meta property="og:image:alt" content="Write custom ASP.NET Core middleware | Microsoft Learn">
+
+	<meta name="twitter:card" content="summary">
+
+	<meta name="twitter:site" content="@MicrosoftLearn">
+
+	<meta name="color-scheme" content="light dark">
+
+
+	<meta name="author" content="Rick-Anderson">
+<meta name="breadcrumb_path" content="/aspnet/core/breadcrumb/toc.json">
+<meta name="default_moniker" content="aspnetcore-8.0">
+<meta name="depot_name" content="MSDN.aspnet-core-conceptual">
+<meta name="description" content="Learn how to write custom ASP.NET Core middleware.">
+<meta name="document_id" content="13e2d968-17a6-1a50-53cd-1d6b9ad0276d">
+<meta name="document_version_independent_id" content="cd22a135-4446-79f5-89db-b741bd44a720">
+<meta name="feedback_system" content="OpenSource">
+<meta name="git_commit_id" content="e17558808607b1d56b3d58fdedea42edb25fff99">
+<meta name="gitcommit" content="https://github.com/dotnet/AspNetCore.Docs/blob/e17558808607b1d56b3d58fdedea42edb25fff99/aspnetcore/fundamentals/middleware/write.md">
+<meta name="locale" content="en-us">
+<meta name="monikerRange" content="&gt;= aspnetcore-3.1">
+<meta name="monikers" content="aspnetcore-3.1">
+<meta name="monikers" content="aspnetcore-5.0">
+<meta name="monikers" content="aspnetcore-6.0">
+<meta name="monikers" content="aspnetcore-7.0">
+<meta name="monikers" content="aspnetcore-8.0">
+<meta name="ms.author" content="riande">
+<meta name="ms.custom" content="mvc">
+<meta name="ms.date" content="12/18/2021">
+<meta name="ms.prod" content="aspnet-core">
+<meta name="ms.technology" content="aspnetcore-fundamentals">
+<meta name="ms.topic" content="conceptual">
+<meta name="original_content_git_url" content="https://github.com/dotnet/AspNetCore.Docs/blob/live/aspnetcore/fundamentals/middleware/write.md">
+<meta name="page_type" content="conceptual">
+<meta name="pdf_url_template" content="https://learn.microsoft.com/pdfstore/en-us/MSDN.aspnet-core-conceptual/{branchName}{pdfName}">
+<meta name="schema" content="Conceptual">
+<meta name="site_name" content="Docs">
+<meta name="toc_rel" content="../../toc.json">
+<meta name="uhfHeaderId" content="MSDocsHeader-AspNet">
+<meta name="uid" content="fundamentals/middleware/write">
+<meta name="updated_at" content="2022-06-03 09:59 PM">
+<meta name="word_count" content="1433">
+
+
+	<meta name="recommendation_types" content="Training">
+	<meta name="recommendation_types" content="Certification">
+	
+
+	<meta name="persistent_id" content="f3890656-a128-4c55-0ed2-0882f2d05c6f">
+	
+
+
+	<meta name="cmProducts" content="https://authoring-docs-microsoft.poolparty.biz/devrel/d452572f-6212-498f-9050-ca4a9e50a425" data-source="generated">
+
+	
+
+
+	<meta name="spProducts" content="https://authoring-docs-microsoft.poolparty.biz/devrel/a12e40b7-59a2-4437-96e2-166ce622b864" data-source="generated">
+
+	
+
+	<meta name="scope" content="ASP.NET Core">
+	<meta name="github_feedback_content_git_url" content="https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/fundamentals/middleware/write.md">
+<link href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0" rel="canonical">
+	<title>Write custom ASP.NET Core middleware | Microsoft Learn</title>
+
+		<link rel="stylesheet" href="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/928f029f.site-ltr.css">
+
+	
+
+	<script id="msdocs-script">
+	var msDocs = {
+		data: {
+			timeOrigin: Date.now(),
+			contentLocale: 'en-us',
+			contentDir: 'ltr',
+			userLocale: 'en-us',
+			userDir: 'ltr',
+			pageTemplate: 'Conceptual',
+			brand: '',
+			context: {
+			},
+			hasBinaryRating: true,
+			hasGithubIssues: false,
+			feedbackHelpLinkType:'',
+			feedbackHelpLinkUrl:'',
+			standardFeedback: false,
+			showFeedbackReport: false,
+			enableTutorialFeedback: false,
+			contentWellNotification: '',
+			feedbackSystem: 'OpenSource',
+			feedbackGitHubRepo: 'dotnet/AspNetCore.Docs',
+			feedbackProductUrl: 'https://github.com/dotnet/aspnetcore/blob/main/CONTRIBUTING.md',
+			extendBreadcrumb: false,
+			isEditDisplayable: true,
+			hideViewSource: false,
+			hasPageActions: true,
+			hasPrintButton: true,
+			hasBookmark: true,
+			hasShare: true,
+			isPermissioned: false,
+			isPrivateUnauthorized: false,
+			hasRecommendations: true,
+			openSourceFeedback: true,
+			openSourceFeedbackIssueUrl: 'https://github.com/dotnet/aspnetcore.docs/issues/new?template=customer-feedback.yml',
+			openSourceFeedbackIssueTitle: '',
+			openSourceFeedbackIssueLabels: 'Source - Docs.ms,:watch: Not Triaged',
+			contributors: [
+						{ name: "Rick-Anderson", url: "https://github.com/Rick-Anderson" },
+						{ name: "guardrex", url: "https://github.com/guardrex" },
+						{ name: "fiyazbinhasan", url: "https://github.com/fiyazbinhasan" },
+						{ name: "serpent5", url: "https://github.com/serpent5" },
+						{ name: "tdykstra", url: "https://github.com/tdykstra" }
+],
+		},
+		functions:{}
+	};
+	</script>
+	<script src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/wcp-consent.js.download"></script>
+	<script src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/ms.jsll-3.min.js.download"></script>
+
+	<script src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/67a45209.deprecation.js.download"></script>
+		<link rel="preconnect" href="https://mscom.demdex.net/" crossorigin="">
+		<link rel="dns-prefetch" href="https://target.microsoft.com/">
+		<link rel="dns-prefetch" href="https://microsoftmscompoc.tt.omtrdc.net/">
+		<link rel="preload" as="script" href="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/at.js.download" integrity="sha384-1/viVM50hgc33O2gOgkWz3EjiD/Fy/ld1dKYXJRUyjNYVEjSUGcSN+iPiQF7e4cu" crossorigin="anonymous" id="adobe-target-script" type="application/javascript">
+		<script src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/b2de31c7.index-docs.js.download"></script><style>
+		[data-moniker]:not([data-moniker~='aspnetcore-8.0']) {
+			display: none !important;
+		}
+	</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"name":"Learn","position":1,"@type":"ListItem","item":"https://learn.microsoft.com/en-us/?view=aspnetcore-8.0"},{"name":".NET","position":2,"@type":"ListItem","item":"https://learn.microsoft.com/en-us/dotnet/?view=aspnetcore-8.0"},{"name":"ASP.NET Core","position":3,"@type":"ListItem","item":"https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0"}]}</script></head>
+
+<body lang="en-us" dir="ltr">
+	<div class="header-holder has-default-focus">
+		<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#main" class="skip-to-main-link has-outline-color-text visually-hidden-until-focused position-fixed has-inner-focus focus-visible top-0 left-0 right-0 padding-xs has-text-centered has-body-background" tabindex="1">Skip to main content</a>
+
+		<div hidden="" id="cookie-consent-holder" data-test-id="cookie-consent-container"></div>
+
+		<div id="unsupported-browser" style="
+			background-color: white;
+			color: black;
+			padding: 16px;
+			border-bottom: 1px solid grey;" hidden="">
+			<div style="max-width: 800px; margin: 0 auto;">
+				<p style="font-size: 24px">This browser is no longer supported.</p>
+				<p style="font-size: 16px; margin-top: 16px;">Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support.</p>
+				<div style="margin-top: 12px;">
+					<a href="https://go.microsoft.com/fwlink/p/?LinkID=2092881" style="
+						background-color: #0078d4;
+						border: 1px solid #0078d4;
+						color: white;
+						padding: 6px 12px;
+						border-radius: 2px;
+						display: inline-block;
+						">
+Download Microsoft Edge					</a>
+					<a href="https://learn.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge" style="
+							background-color: white;
+							padding: 6px 12px;
+							border: 1px solid #505050;
+							color: #171717;
+							border-radius: 2px;
+							display: inline-block;
+							">
+More info about Internet Explorer and Microsoft Edge					</a>
+				</div>
+			</div>
+		</div>
+		<!-- liquid-tag banners global -->
+
+		<!-- site header -->
+		<header id="ms--site-header" class="display-none"></header>
+
+		<div id="headerAreaHolder" data-bi-name="header">
+<header role="banner" itemscope="itemscope" itemtype="http://schema.org/Organization"><!----> <div class="nav-bar" data-test-id="primary-nav-bar" data-bi-name="L1-header"><!----> <div class="nav-bar-brand display-flex align-items-center padding-none margin-left-xs margin-left-none-tablet margin-right-xxs">
+		
+					<a class="nav-bar-button padding-inline-none" itemprop="url" href="https://www.microsoft.com/" aria-label="Microsoft" data-bi-name="microsoft-logo-link">
+						 <div class="nav-bar-logo" role="presentation" aria-hidden="true" itemprop="logo" itemscope="itemscope">
+				
+		<svg xmlns="http://www.w3.org/2000/svg" width="108" height="23" viewBox="72 72 337 74" preserveAspectRatio="xMidYMin slice">
+			<g data-name="MS-symbol">
+				<clippath>
+					<path transform="matrix(1 0 0 -1 0 216)" d="M0 216h482V0H0z"></path>
+				</clippath>
+				<g clip-path="url(#a)">
+					<path d="M394.942 104.59h-10.858v25.003h-7.38V104.59h-5.182v-5.965h5.182v-4.308c0-3.254 1.06-5.92 3.178-7.998 2.12-2.079 4.835-3.118 8.15-3.118.882 0 1.666.045 2.35.135a9.37 9.37 0 011.806.407v6.296c-.24-.14-.663-.31-1.265-.512-.603-.2-1.296-.3-2.078-.3-1.528 0-2.702.476-3.526 1.43-.824.954-1.235 2.365-1.235 4.232v3.736h10.858v-6.959l7.321-2.229v9.188h7.381v5.965h-7.38v14.49c0 1.91.345 3.254 1.038 4.037.693.783 1.782 1.175 3.27 1.175.42 0 .927-.1 1.52-.3a7.178 7.178 0 001.552-.724v6.025c-.463.261-1.23.502-2.305.723a15.742 15.742 0 01-3.178.331c-3.073 0-5.378-.817-6.914-2.455-1.537-1.637-2.305-4.102-2.305-7.396zm-48.407 9.73c0 3.233.733 5.703 2.2 7.411 1.465 1.707 3.564 2.56 6.295 2.56 2.652 0 4.67-.853 6.055-2.56 1.386-1.708 2.08-4.238 2.08-7.592 0-3.334-.719-5.849-2.155-7.547-1.436-1.697-3.45-2.545-6.04-2.545-2.67 0-4.745.888-6.22 2.666-1.477 1.777-2.215 4.313-2.215 7.607m-7.592.24c0-5.12 1.446-9.177 4.338-12.17 2.892-2.993 6.91-4.489 12.05-4.489 4.841 0 8.621 1.441 11.343 4.323 2.721 2.883 4.082 6.774 4.082 11.674 0 5.021-1.447 9.018-4.338 11.99-2.892 2.973-6.829 4.458-11.81 4.458-4.8 0-8.61-1.41-11.432-4.232-2.822-2.82-4.233-6.673-4.233-11.554m-16.417-7.802c0 1.045.331 1.863.994 2.456.662.592 2.128 1.34 4.398 2.243 2.912 1.166 4.956 2.476 6.131 3.932 1.175 1.456 1.762 3.22 1.762 5.287 0 2.912-1.12 5.252-3.359 7.02-2.24 1.767-5.267 2.65-9.083 2.65-1.285 0-2.706-.155-4.263-.467-1.556-.31-2.877-.707-3.96-1.19v-7.169a17.945 17.945 0 004.277 2.198c1.526.543 2.911.814 4.157.814 1.647 0 2.862-.23 3.645-.693.784-.46 1.175-1.235 1.175-2.319 0-1.005-.406-1.853-1.22-2.546-.813-.693-2.355-1.492-4.624-2.395-2.69-1.125-4.599-2.39-5.724-3.796-1.125-1.406-1.687-3.193-1.687-5.362 0-2.792 1.11-5.086 3.33-6.884 2.217-1.797 5.095-2.696 8.63-2.696 1.084 0 2.3.12 3.645.361 1.346.242 2.47.553 3.374.934v6.93c-.964-.644-2.089-1.195-3.374-1.658-1.286-.462-2.56-.693-3.826-.693-1.386 0-2.465.271-3.238.813-.774.543-1.16 1.286-1.16 2.23m-35.066 7.562c0 3.233.733 5.703 2.2 7.411 1.465 1.707 3.564 2.56 6.295 2.56 2.652 0 4.67-.853 6.055-2.56 1.386-1.708 2.08-4.238 2.08-7.592 0-3.334-.719-5.849-2.155-7.547-1.436-1.697-3.449-2.545-6.039-2.545-2.672 0-4.745.888-6.222 2.666-1.476 1.777-2.214 4.313-2.214 7.607m-7.592.24c0-5.12 1.446-9.177 4.338-12.17 2.893-2.993 6.91-4.489 12.051-4.489 4.84 0 8.621 1.441 11.342 4.323 2.721 2.883 4.082 6.774 4.082 11.674 0 5.021-1.446 9.018-4.338 11.99-2.892 2.973-6.828 4.458-11.809 4.458-4.8 0-8.61-1.41-11.433-4.232-2.822-2.82-4.233-6.673-4.233-11.554m-3.136-16.448c.582 0 1.105.041 1.567.121.462.08.853.18 1.175.301v7.38c-.382-.28-.939-.546-1.672-.798-.733-.25-1.622-.376-2.666-.376-1.788 0-3.299.753-4.534 2.26-1.235 1.505-1.853 3.825-1.853 6.958v15.635h-7.29V98.624h7.29v4.88h.12c.663-1.687 1.667-3.007 3.013-3.96 1.346-.954 2.962-1.432 4.85-1.432m-27.956 26.18c1.084 0 2.28-.25 3.585-.754a15.06 15.06 0 003.615-1.988v6.778c-1.165.663-2.485 1.165-3.962 1.506-1.475.342-3.098.512-4.865.512-4.559 0-8.265-1.44-11.116-4.323-2.852-2.88-4.278-6.562-4.278-11.04 0-4.98 1.456-9.083 4.37-12.307 2.91-3.224 7.037-4.835 12.38-4.835 1.366 0 2.746.176 4.143.527 1.395.352 2.504.758 3.328 1.22v6.99c-1.125-.824-2.274-1.462-3.45-1.914a9.966 9.966 0 00-3.599-.678c-2.872 0-5.192.934-6.959 2.802-1.768 1.868-2.652 4.388-2.652 7.562 0 3.132.85 5.573 2.546 7.32 1.697 1.748 4.002 2.621 6.914 2.621m-22.112 5.302h-7.29V98.624h7.29zm-8.044-39.916c0-1.205.437-2.214 1.311-3.028.874-.813 1.913-1.22 3.118-1.22 1.285 0 2.35.417 3.193 1.25.844.834 1.266 1.833 1.266 2.998 0 1.185-.432 2.18-1.296 2.982-.864.804-1.918 1.205-3.163 1.205-1.246 0-2.295-.406-3.148-1.219-.854-.815-1.28-1.803-1.28-2.968m-6.274-3.284v43.2h-7.5v-33.86h-.12l-13.408 33.86h-4.97l-13.738-33.86h-.09v33.86h-6.929v-43.2h10.755l12.412 32.024h.18l13.105-32.024z" class="fill-current-color fill-link-text-forced-colors color-text-subtle"></path>
+					<path d="M106.214 106.214H71.996V71.996h34.218z" fill="#f25022"></path>
+					<path d="M143.993 106.214h-34.218V71.996h34.218z" fill="#7fba00"></path>
+					<path d="M106.214 143.993H71.996v-34.218h34.218z" fill="#00a4ef"></path>
+					<path d="M143.993 143.993h-34.218v-34.218h34.218z" fill="#ffb900"></path>
+				</g>
+			</g>
+		</svg>
+	
+		  </div>
+					</a>
+			  
+	</div> 
+				
+		<div class="nav-bar-item is-hidden-tablet">
+			<div class="nav-bar-menu">
+				<button class="nav-bar-button is-title" data-test-id="mobile-nav-expander" title="Global navigation" aria-expanded="false">
+					<span class="nav-bar-menu-title"><!---->Documentation<!----></span>
+					<div class="nav-bar-burger">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span class="nav-bar-burger-label"><!---->Global navigation<!----></span>
+					</div>
+				</button>
+			</div>
+		</div>
+	
+				
+		<nav class="nav-bar-nav" role="navigation" aria-label="Global">
+			<ul class="nav-bar-nav-list">
+				
+		<li class="nav-bar-item is-category">
+			<a data-test-id="header-link-category" class="nav-bar-button is-title has-hover-underline" itemprop="url" data-bi-name="L1-category-link" href="https://learn.microsoft.com/en-us/">
+				<span><!---->Learn<!----></span>
+			</a>
+		</li>
+	
+				<!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-documentation" class=" nav-bar-button has-hover-underline is-active" href="https://learn.microsoft.com/en-us/docs/" aria-current="true" data-bi-name="L1-navigation-link">
+						<span><!---->Documentation<!----></span>
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-training" class=" nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/training/" data-bi-name="L1-navigation-link">
+						<span><!---->Training<!----></span>
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-credentials" class=" nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/credentials/" data-bi-name="L1-navigation-link">
+						<span><!---->Credentials<!----></span>
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-q&amp;a" class=" nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/answers/" data-bi-name="L1-navigation-link">
+						<span><!---->Q&amp;A<!----></span>
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-code-samples" class=" nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/samples/browse/" data-bi-name="L1-navigation-link">
+						<span><!---->Code Samples<!----></span>
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-assessments" class=" nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/assessments/" data-bi-name="L1-navigation-link">
+						<span><!---->Assessments<!----></span>
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-shows" class=" nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/shows/" data-bi-name="L1-navigation-link">
+						<span><!---->Shows<!----></span>
+					</a>
+				</li>
+		  <!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-135" data-bi-name="L1-navigation-menu" value="undefined">
+			<span><!---->More<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-135" aria-label="More">
+			<!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button is-active" href="https://learn.microsoft.com/en-us/docs/" aria-current="true" data-bi-name="L1-navigation-link">
+						Documentation
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://learn.microsoft.com/en-us/training/" data-bi-name="L1-navigation-link">
+						Training
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://learn.microsoft.com/en-us/credentials/" data-bi-name="L1-navigation-link">
+						Credentials
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://learn.microsoft.com/en-us/answers/" data-bi-name="L1-navigation-link">
+						Q&amp;A
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://learn.microsoft.com/en-us/samples/browse/" data-bi-name="L1-navigation-link">
+						Code Samples
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://learn.microsoft.com/en-us/assessments/" data-bi-name="L1-navigation-link">
+						Assessments
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://learn.microsoft.com/en-us/shows/" data-bi-name="L1-navigation-link">
+						Shows
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+			</ul>
+		</nav>
+	
+				<span class="nav-bar-spacer"></span>
+				
+		<div class="nav-bar-search " id="ax-136" hidden="">
+			
+		<form class="nav-bar-search-form" method="GET" name="nav-bar-search-form" role="search" id="nav-bar-search-form" aria-label="Search" action="https://learn.microsoft.com/en-us/search/">
+			<div class="autocomplete" data-bi-name="autocomplete"><!---->
+			<div class="field-body control ">
+				<input role="combobox" maxlength="100" aria-autocomplete="list" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="site-search-input" data-test-id="site-search-input" class="autocomplete-input input input-sm
+						
+						" type="search" name="terms" aria-expanded="false" aria-owns="ax-137-listbox" aria-controls="ax-137-listbox" aria-activedescendant="" aria-label="Search" aria-describedby="ms--site-search-input-description" placeholder="Search" pattern=".*">
+
+				<span aria-hidden="true" class="icon is-small is-left" hidden="">
+					<span class="has-text-primary docon docon-"></span>
+				</span>
+
+				<span aria-hidden="true" class="autocomplete-loader loader has-text-primary " hidden=""></span>
+
+				<span hidden="" id="ms--site-search-input-description">
+					Suggestions will filter as you type
+				</span>
+			</div>
+
+			<ul role="listbox" id="ax-137-listbox" data-test-id="site-search-input-listbox" class="autocomplete-suggestions is-vertically-scrollable padding-xxs " aria-label="Suggestions" hidden="">
+				
+				
+			</ul>
+		<!----></div>
+			<!-- mobile safari will not dispatch submit event unless there's a submit button that is not display:none -->
+			<button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true"></button>
+			<input name="category" hidden="" value="">
+			
+			
+		</form>
+	
+		</div>
+		
+					<div class="nav-bar-search">
+						<!-- hidden when the width drops to tablet -->
+						
+		<form class="nav-bar-search-form" method="GET" name="nav-bar-search-form" role="search" id="nav-bar-search-form-desktop" aria-label="Search" action="https://learn.microsoft.com/en-us/search/">
+			<div class="autocomplete" data-bi-name="autocomplete"><!---->
+			<div class="field-body control has-icons-left">
+				<input role="combobox" maxlength="100" aria-autocomplete="list" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="site-search-input-desktop" data-test-id="site-search-input-desktop" class="autocomplete-input input input-sm
+						control has-icons-left
+						" type="search" name="terms" aria-expanded="false" aria-owns="ax-138-listbox" aria-controls="ax-138-listbox" aria-activedescendant="" aria-label="Search" aria-describedby="ms--site-search-input-desktop-description" placeholder="Search" pattern=".*">
+
+				<span aria-hidden="true" class="icon is-small is-left">
+					<span class="has-text-primary docon docon-search"></span>
+				</span>
+
+				<span aria-hidden="true" class="autocomplete-loader loader has-text-primary " hidden=""></span>
+
+				<span hidden="" id="ms--site-search-input-desktop-description">
+					Suggestions will filter as you type
+				</span>
+			</div>
+
+			<ul role="listbox" id="ax-138-listbox" data-test-id="site-search-input-desktop-listbox" class="autocomplete-suggestions is-vertically-scrollable padding-xxs " aria-label="Suggestions" hidden="">
+				
+				
+			</ul>
+		<!----></div>
+			<!-- mobile safari will not dispatch submit event unless there's a submit button that is not display:none -->
+			<button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true"></button>
+			<input name="category" hidden="" value="">
+			
+			
+		</form>
+	
+					</div>
+			  
+		<div class="nav-bar-search " hidden="">
+			<div class="nav-bar-search-form-expander">
+				<button id="form-expander" data-test-id="form-expander" class="nav-bar-button has-hover-underline " title="Search" aria-expanded="false" aria-controls="ax-136">
+					
+		<span class="is-visually-hidden-mobile"><!---->Search<!----></span>
+		<span class="icon margin-left-xxs" aria-hidden="true">
+			<span class="docon docon-search"></span>
+		</span>
+	
+				</button>
+			</div>
+		</div>
+	
+				
+		<div class="nav-bar-profile">
+			
+		<a class="docs-sign-in auth-status-determined not-authenticated" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#"> Sign in </a>
+	 
+		<div class="dropdown has-caret auth-status-determined authenticated">
+			<button class="dropdown-trigger button-reset" aria-controls="user-menu" aria-expanded="false" data-bi-name="L1-user-menu" aria-label="Your Account">
+				<figure class="image is-36x36">
+					<img class="has-body-background-medium border-radius-rounded" alt="" data-profile-property="avatarThumbnailUrl">
+				</figure>
+			</button>
+			<div class="dropdown-menu box justify-content-flex-start has-body-background" id="user-menu" data-bi-name="user-menu" role="menu">
+				<div class="media is-user-dir">
+					<div class="media-left">
+						<figure class="image is-48x48" aria-hidden="true">
+							<img class="has-body-background-medium border-radius-rounded" aria-labelledby="displayName" alt="" data-profile-property="avatarUrl">
+						</figure>
+					</div>
+					<div class="media-content">
+						<h2 class="title font-size-lg">
+							<span id="displayName" class="is-inline-truncated has-max-width-200" data-profile-property="displayName"></span>
+						</h2>
+						<p class="subtitle font-size-sm margin-bottom-none">
+							<span class="is-inline-truncated has-max-width-200" data-profile-property="upn"></span>
+						</p>
+					</div>
+				</div>
+				<ul class="padding-top-xs padding-bottom-xs">
+					<li class="padding-bottom-xs">
+						<a data-profile-property="profileUrl" href="https://learn.microsoft.com/en-us/users/me/activity/"><!---->Profile<!----></a>
+					</li>
+					<li>
+						<a data-profile-property="settingsUrl" href="https://learn.microsoft.com/en-us/users/me/settings/"><!---->Settings<!----></a>
+					</li>
+				</ul>
+				<div class="border-top padding-top-xs">
+					<a class="docs-sign-out" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#"><!---->Sign out<!----></a>
+				</div>
+			</div>
+		</div>
+	
+		</div>
+	
+			 <!----></div> <div class="nav-bar border-top is-hidden-mobile" data-test-id="secondary-nav-bar" data-bi-name="L2-header"><!----> 
+		<a class="nav-bar-button is-title has-hover-underline" itemprop="url" data-bi-name="L2-category-link" href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-6.0">
+			<span>
+				ASP.NET Core
+				
+			</span>
+		</a>
+	 
+		
+		<nav class="nav-bar-nav" role="navigation" aria-label="Site">
+			<ul class="nav-bar-nav-list">
+				
+				<!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-119" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Languages<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-119" aria-label="Languages">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/csharp/" data-bi-name="L2-navigation-link">
+						C#
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/fsharp/" data-bi-name="L2-navigation-link">
+						F#
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/visual-basic/" data-bi-name="L2-navigation-link">
+						Visual Basic
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-120" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Workloads<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-120" aria-label="Workloads">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-6.0" data-bi-name="L2-navigation-link">
+						Web
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/xamarin/" data-bi-name="L2-navigation-link">
+						Mobile
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/azure/" data-bi-name="L2-navigation-link">
+						Cloud
+					</a>
+				</li>
+		  <!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-121" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Desktop<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-121" aria-label="Desktop">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/desktop-wpf/?view=netdesktop-5.0" data-bi-name="L2-navigation-link">
+						Windows Presentation Foundation
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/framework/winforms/?view=netframeworkdesktop-4.8" data-bi-name="L2-navigation-link">
+						Windows Forms
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/windows/uwp/" data-bi-name="L2-navigation-link">
+						Universal Windows apps
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-122" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Machine Learning &amp; Data<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-122" aria-label="Machine Learning &amp; Data">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/machine-learning/" data-bi-name="L2-navigation-link">
+						ML.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/spark/" data-bi-name="L2-navigation-link">
+						.NET for Apache Spark
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/ef/" data-bi-name="L2-navigation-link">
+						Entity Framework
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-123" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->APIs<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-123" aria-label="APIs">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=net-6.0" data-bi-name="L2-navigation-link">
+						.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=netframework-4.8" data-bi-name="L2-navigation-link">
+						.NET Framework
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=aspnetcore-5.0" data-bi-name="L2-navigation-link">
+						ASP.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=ml-dotnet" data-bi-name="L2-navigation-link">
+						ML.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=efcore-6.0" data-bi-name="L2-navigation-link">
+						EF Core
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+				<li class="nav-bar-item">
+					<a data-test-id="header-link-troubleshooting" class="has-external-link-indicator nav-bar-button has-hover-underline " href="https://learn.microsoft.com/en-us/troubleshoot/developer/webapps/aspnet-welcome" data-bi-name="L2-navigation-link">
+						<span><!---->Troubleshooting<!----></span>
+					</a>
+				</li>
+		  <!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-124" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Resources<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-124" aria-label="Resources">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet" data-bi-name="L2-navigation-link">
+						What is .NET?
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/learn/dotnet/architecture-guides" data-bi-name="L2-navigation-link">
+						.NET Architecture Guides
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/learn" data-bi-name="L2-navigation-link">
+						Learning Materials
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/download" data-bi-name="L2-navigation-link">
+						Downloads
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/platform/community" data-bi-name="L2-navigation-link">
+						Community
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/platform/support" data-bi-name="L2-navigation-link">
+						Support
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://devblogs.microsoft.com/dotnet/" data-bi-name="L2-navigation-link">
+						Blog
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-125" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->More<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-125" aria-label="More">
+			<!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-126" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Languages<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-126" aria-label="Languages">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/csharp/" data-bi-name="L2-navigation-link">
+						C#
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/fsharp/" data-bi-name="L2-navigation-link">
+						F#
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/visual-basic/" data-bi-name="L2-navigation-link">
+						Visual Basic
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-127" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Workloads<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-127" aria-label="Workloads">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-6.0" data-bi-name="L2-navigation-link">
+						Web
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/xamarin/" data-bi-name="L2-navigation-link">
+						Mobile
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/azure/" data-bi-name="L2-navigation-link">
+						Cloud
+					</a>
+				</li>
+		  <!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-128" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Desktop<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-128" aria-label="Desktop">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/desktop-wpf/?view=netdesktop-5.0" data-bi-name="L2-navigation-link">
+						Windows Presentation Foundation
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/framework/winforms/?view=netframeworkdesktop-4.8" data-bi-name="L2-navigation-link">
+						Windows Forms
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/windows/uwp/" data-bi-name="L2-navigation-link">
+						Universal Windows apps
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-129" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Machine Learning &amp; Data<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-129" aria-label="Machine Learning &amp; Data">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/machine-learning/" data-bi-name="L2-navigation-link">
+						ML.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/spark/" data-bi-name="L2-navigation-link">
+						.NET for Apache Spark
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/ef/" data-bi-name="L2-navigation-link">
+						Entity Framework
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+		</ul>
+	</li><!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-130" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->APIs<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-130" aria-label="APIs">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=net-6.0" data-bi-name="L2-navigation-link">
+						.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=netframework-4.8" data-bi-name="L2-navigation-link">
+						.NET Framework
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=aspnetcore-5.0" data-bi-name="L2-navigation-link">
+						ASP.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=ml-dotnet" data-bi-name="L2-navigation-link">
+						ML.NET
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/dotnet/api/?view=efcore-6.0" data-bi-name="L2-navigation-link">
+						EF Core
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+				<li class="nav-bar-item" hidden="">
+					<a class="has-external-link-indicator nav-bar-button " href="https://learn.microsoft.com/en-us/troubleshoot/developer/webapps/aspnet-welcome" data-bi-name="L2-navigation-link">
+						Troubleshooting
+					</a>
+				</li>
+		  <!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  " aria-controls="ax-131" data-bi-name="L2-navigation-menu" value="undefined">
+			<span><!---->Resources<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-right-light "></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-131" aria-label="Resources">
+			<!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet" data-bi-name="L2-navigation-link">
+						What is .NET?
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/learn/dotnet/architecture-guides" data-bi-name="L2-navigation-link">
+						.NET Architecture Guides
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/learn" data-bi-name="L2-navigation-link">
+						Learning Materials
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/download" data-bi-name="L2-navigation-link">
+						Downloads
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/platform/community" data-bi-name="L2-navigation-link">
+						Community
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://dotnet.microsoft.com/platform/support" data-bi-name="L2-navigation-link">
+						Support
+					</a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item">
+					<a class="has-external-link-indicator nav-bar-button " href="https://devblogs.microsoft.com/dotnet/" data-bi-name="L2-navigation-link">
+						Blog
+					</a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+		</ul>
+	</li><!---->
+			</ul>
+		</nav>
+	
+		<span class="nav-bar-spacer"></span>
+		
+		<ol class="nav-bar-list">
+			 
+		<li class="nav-bar-item ">
+			<a data-test-id="navbar-primary-cta" class="button button-sm button-primary button-filled" href="https://dotnet.microsoft.com/download" data-bi-name="L2-primary-cta">
+				Download .NET
+			</a>
+		</li>
+	
+		</ol>
+	 
+	 <!----></div> <!----></header>		</div>
+
+
+			<div id="content-header" class="content-header uhf-container has-padding has-default-focus border-bottom-none" data-bi-name="content-header">
+				<div class="content-header-controls margin-xxs margin-inline-sm-tablet">
+					<button type="button" class="contents-button button button-sm margin-right-xxs" data-bi-name="contents-expand" aria-haspopup="true" data-contents-button="">
+						<span class="icon"><span class="docon docon-menu" aria-hidden="true"></span></span>
+						<span class="contents-expand-title">
+Table of contents						</span>
+					</button>
+					<button type="button" class="ap-collapse-behavior ap-expanded button button-sm" data-bi-name="ap-collapse" aria-controls="action-panel">
+						<span class="icon"><span class="docon docon-exit-mode" aria-hidden="true"></span></span>
+						<span>Exit focus mode</span>
+					</button>
+				</div>
+			</div>
+
+		<div id="disclaimer-holder" class="has-overflow-hidden has-default-focus">
+			<!-- liquid-tag banners sectional -->
+		</div>
+	</div>
+
+	<div class="mainContainer  uhf-container has-default-focus" data-bi-name="body">
+
+		<div class="columns has-large-gaps is-gapless-mobile ">
+
+			<div id="left-container" class="left-container is-hidden-mobile column is-one-third-tablet is-one-quarter-desktop">
+				<nav id="affixed-left-container" class="margin-top-sm-tablet position-sticky display-flex flex-direction-column" role="navigation" aria-label="Primary" data-bi-name="left toc" style="top: 24px; height: calc(100vh - 158.219px); max-height: 6319.83px;"><div class="moniker-picker2" data-bi-name="moniker-picker"><!---->
+		<span class="label margin-bottom-xxs"><!---->Version<!----></span>
+		<div class="dropdown margin-bottom-xxs" role="navigation" aria-label="Version">
+			<button class="dropdown-trigger justify-content-flex-start button-block button button-sm inner-focus" aria-expanded="false" data-autofocus="" aria-controls="ax-139">
+				<span class="has-text-overflow-ellipsis"><!---->ASP.NET Core 8.0<!----></span>
+				<span class="dropdown-button-chevron color-text" aria-hidden="true">
+					<span class="icon">
+						<span class="docon docon-chevron-down-light expanded-indicator"></span>
+					</span>
+				</span>
+			</button>
+			<ul class="dropdown-menu is-full-width is-vertically-scrollable" id="ax-139" aria-label="ASP.NET Core">
+						<!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0"><!---->8.0<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-7.0"><!---->7.0<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-6.0"><!---->6.0<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-5.0"><!---->5.0<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-3.1"><!---->3.1<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-3.0"><!---->3.0<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-2.2"><!---->2.2<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-2.1"><!----> 2.1<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-2.0"><!---->2.0<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-1.1"><!---->1.1<!----></a>
+		</li>
+	<!----><!----><!---->
+		<li>
+			<a class="preserve-view button button-sm button-clear button-block text-decoration-none inner-focus justify-content-flex-start has-text-wrap is-text-left" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-1.0"><!---->1.0<!----></a>
+		</li>
+	<!----><!---->
+						
+				  </ul>
+		</div>
+	<!----></div><form action="javascript:" role="search" aria-label="Search" class="margin-bottom-xxs"><label class="visually-hidden" for="ax-132">Search</label><div class="autocomplete display-block" data-bi-name="autocomplete"><!---->
+			<div class="field-body control has-icons-left">
+				<input role="combobox" maxlength="100" aria-autocomplete="list" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="ax-132" data-test-id="ax-132" class="autocomplete-input input input-sm
+						control has-icons-left
+						width-full" type="text" aria-expanded="false" aria-owns="ax-133-listbox" aria-controls="ax-133-listbox" aria-activedescendant="" aria-describedby="ms--ax-132-description" placeholder="Filter by title" pattern=".*">
+
+				<span aria-hidden="true" class="icon is-small is-left">
+					<span class="has-text-primary docon docon-filter-settings"></span>
+				</span>
+
+				<span aria-hidden="true" class="autocomplete-loader loader has-text-primary " hidden=""></span>
+
+				<span hidden="" id="ms--ax-132-description">
+					Suggestions will filter as you type
+				</span>
+			</div>
+
+			<ul role="listbox" id="ax-133-listbox" data-test-id="ax-132-listbox" class="autocomplete-suggestions is-vertically-scrollable padding-xxs " aria-label="Suggestions" hidden="">
+				
+				
+			</ul>
+		<!----></div></form><ul class="tree table-of-contents is-vertically-scrollable flex-grow-1 flex-shrink-1" role="tree" aria-label="Table of contents" data-bi-name="tree" data-is-collapsible="true"><li role="none"><a aria-setsize="25" aria-level="1" aria-posinset="1" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0">ASP.<wbr>NET Core documentation</a></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="2" role="treeitem" tabindex="-1" id="title-2-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Overview</span></li><li role="none"><a aria-setsize="25" aria-level="1" aria-posinset="3" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/getting-started/?view=aspnetcore-8.0">Get started</a></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="4" role="treeitem" tabindex="-1" id="title-4-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>What's new</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="5" role="treeitem" tabindex="-1" id="title-5-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Tutorials</span></li><li class="tree-item is-expanded" aria-setsize="25" aria-level="1" aria-posinset="6" role="treeitem" tabindex="-1" id="title-6-1" aria-expanded="true"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Fundamentals</span><ul class="tree-group" role="group"><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="1" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/?view=aspnetcore-8.0">Overview</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="2" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-8.0">App start up</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="3" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0">Dependency injection (services)</a></li><li class="tree-item" aria-setsize="15" aria-level="2" aria-posinset="4" role="treeitem" tabindex="-1" id="title-6-1_4-2" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Native AOT</span></li><li class="tree-item is-expanded" aria-setsize="15" aria-level="2" aria-posinset="5" role="treeitem" tabindex="-1" id="title-6-1_5-2" aria-expanded="true"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Middleware</span><ul class="tree-group" role="group"><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="1" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0">Middleware overview</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="2" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-8.0">Rate limiting middleware</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="3" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/middleware?view=aspnetcore-8.0">Middleware in Minimal API apps</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="4" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/test/middleware?view=aspnetcore-8.0">Test middleware</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="5" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/middleware?view=aspnetcore-8.0">Response caching middleware</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="6" role="treeitem" tabindex="0" class="tree-item is-leaf has-external-link-indicator is-selected" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0" aria-current="page">Write middleware</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="7" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/request-response?view=aspnetcore-8.0">Request and response operations</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="8" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/request-decompression?view=aspnetcore-8.0">Request decompression</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="9" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility?view=aspnetcore-8.0">Factory-based middleware</a></li><li role="none"><a aria-setsize="10" aria-level="3" aria-posinset="10" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility-third-party-container?view=aspnetcore-8.0">Factory-based middleware with third-party container</a></li></ul></li><li class="tree-item" aria-setsize="15" aria-level="2" aria-posinset="6" role="treeitem" tabindex="-1" id="title-6-1_6-2" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Host</span></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="7" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-8.0">Configuration</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="8" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-8.0">Options</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="9" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-8.0">Environments (dev, stage, prod)</a></li><li class="tree-item" aria-setsize="15" aria-level="2" aria-posinset="10" role="treeitem" tabindex="-1" id="title-6-1_10-2" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Logging and monitoring</span></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="11" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/use-http-context?view=aspnetcore-8.0">HttpContext</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="12" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-8.0">Routing</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="13" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0">Handle errors</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="14" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-8.0">Make HTTP requests</a></li><li role="none"><a aria-setsize="15" aria-level="2" aria-posinset="15" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-8.0">Static files</a></li></ul></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="7" role="treeitem" tabindex="-1" id="title-7-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Web apps</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="8" role="treeitem" tabindex="-1" id="title-8-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>APIs</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="9" role="treeitem" tabindex="-1" id="title-9-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Real-time apps</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="10" role="treeitem" tabindex="-1" id="title-10-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Remote Procedure Call apps</span></li><li role="none"><a aria-setsize="25" aria-level="1" aria-posinset="11" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/best-practices?view=aspnetcore-8.0">Best practices</a></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="12" role="treeitem" tabindex="-1" id="title-12-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Servers</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="13" role="treeitem" tabindex="-1" id="title-13-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Test</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="14" role="treeitem" tabindex="-1" id="title-14-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Debug</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="15" role="treeitem" tabindex="-1" id="title-15-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Troubleshoot</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="16" role="treeitem" tabindex="-1" id="title-16-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Code analysis</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="17" role="treeitem" tabindex="-1" id="title-17-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Data access</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="18" role="treeitem" tabindex="-1" id="title-18-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Host and deploy</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="19" role="treeitem" tabindex="-1" id="title-19-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Security and Identity</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="20" role="treeitem" tabindex="-1" id="title-20-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Performance</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="21" role="treeitem" tabindex="-1" id="title-21-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Globalization and localization</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="22" role="treeitem" tabindex="-1" id="title-22-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Advanced</span></li><li class="tree-item" aria-setsize="25" aria-level="1" aria-posinset="23" role="treeitem" tabindex="-1" id="title-23-1" aria-expanded="false"><span data-bi-name="tree-expander" class="tree-expander"><span class="tree-expander-indicator docon docon-chevron-right-light" aria-hidden="true"></span>Migration and updates</span></li><li role="none"><a aria-setsize="25" aria-level="1" aria-posinset="24" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://learn.microsoft.com/en-us/dotnet/api/?view=aspnetcore-8.0">API reference</a></li><li role="none"><a aria-setsize="25" aria-level="1" aria-posinset="25" role="treeitem" tabindex="-1" class="tree-item is-leaf has-external-link-indicator" data-bi-name="tree-leaf" href="https://github.com/dotnet/AspNetCore.Docs/blob/main/CONTRIBUTING.md">Contribute</a></li></ul><div class="padding-xxs padding-none-tablet border-top border-bottom-tablet"><button class="button button-sm button-clear button-block inner-focus justify-content-flex-start-tablet" data-bi-name="download-pdf" rel="nofollow"><!---->
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-dictionary-download"></span>
+			</span>
+			<span><!---->Download PDF<!----></span>
+		<!----></button></div></nav>
+			</div>
+
+			<!-- .primary-holder -->
+			<section class="primary-holder column is-two-thirds-tablet is-three-quarters-desktop">
+				<!--div.columns -->
+				<div class="columns is-gapless-mobile has-large-gaps ">
+
+
+					<div id="main-column" class="column  is-full is-8-desktop">
+
+						<main id="main" class="" role="main" data-bi-name="content" lang="en-us" dir="ltr">
+							<!-- article-header -->
+							<div id="article-header" class="background-color-body margin-top-sm-tablet margin-bottom-xs display-none-print">
+								<div class="display-flex align-items-center ">
+									<details id="article-header-breadcrumbs-overflow-popover" class="popover" data-for="article-header-breadcrumbs" hidden="">
+										<summary class="button button-clear button-primary button-sm inner-focus" aria-label="All breadcrumbs">
+											<span class="icon">
+												<span class="docon docon-more"></span>
+											</span>
+										</summary>
+										<div id="article-header-breadcrumbs-overflow" class="popover-content padding-none"><!---->
+			<nav>
+				<ol class="list-style-none">
+					<!---->
+								<li class="line-clamp-1">
+									<a class="display-block has-inner-focus padding-inline-xs padding-block-xxs border-radius font-size-sm" href="https://learn.microsoft.com/en-us/?view=aspnetcore-8.0">
+										Learn
+									</a>
+								</li>
+							<!----><!---->
+								<li class="line-clamp-1">
+									<a class="display-block has-inner-focus padding-inline-xs padding-block-xxs border-radius font-size-sm" href="https://learn.microsoft.com/en-us/dotnet/?view=aspnetcore-8.0">
+										.NET
+									</a>
+								</li>
+							<!----><!---->
+								<li class="line-clamp-1">
+									<a class="display-block has-inner-focus padding-inline-xs padding-block-xxs border-radius font-size-sm" href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0">
+										ASP.<wbr>NET Core
+									</a>
+								</li>
+							<!---->
+				</ol>
+			</nav>
+			
+		<!----></div>
+									</details>
+
+									<bread-crumbs id="article-header-breadcrumbs" data-test-id="article-header-breadcrumbs" class="overflow-hidden flex-grow-1 margin-right-sm margin-right-md-tablet margin-right-lg-desktop margin-left-negative-xxs padding-left-xxs" style="display: block; white-space: nowrap; overflow: hidden;"><!---->
+			<nav>
+				<ol class="breadcrumbs">
+					<!---->
+								<li class="breadcrumbs-item" data-bread-crumbs-collapse-target="">
+									<a href="https://learn.microsoft.com/en-us/?view=aspnetcore-8.0"><!---->Learn<!----></a>
+								</li>
+							<!----><!---->
+								<li class="breadcrumbs-item" data-bread-crumbs-collapse-target="">
+									<a href="https://learn.microsoft.com/en-us/dotnet/?view=aspnetcore-8.0"><!---->.NET<!----></a>
+								</li>
+							<!----><!---->
+								<li class="breadcrumbs-item" data-bread-crumbs-collapse-target="" style="">
+									<a href="https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0" style=""><!---->ASP.NET Core<!----></a>
+								</li>
+							<!---->
+				</ol>
+			</nav>
+		<!----></bread-crumbs>
+
+									<div id="article-header-page-actions" class="margin-left-auto display-flex flex-wrap-no-wrap align-items-stretch">
+
+										<a id="lang-link-tablet" class="button button-primary button-clear button-sm display-none display-inline-flex-tablet" title="Read in English" data-bi-name="language-toggle" data-read-in-link="" hidden="" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0" data-bi="{&quot;cN&quot;:&quot;language-toggle&quot;,&quot;value&quot;:&quot;off&quot;}">
+											<span class="icon margin-none" aria-hidden="true" data-read-in-link-icon="">
+												<span class="docon docon-locale-globe"></span>
+											</span>
+											<span class="is-visually-hidden" data-read-in-link-text="">Read in English</span>
+										</a>
+
+											<button type="button" class="collection button button-clear button-sm button-primary display-none display-inline-flex-tablet" data-list-type="collection" data-bi-name="collection" title="Add Write custom ASP.NET Core middleware | Microsoft Learn to a collection" data-pressed="false">
+												<span class="icon margin-none" aria-hidden="true">
+													<span class="docon docon-circle-addition"></span>
+												</span>
+												<span class="collection-status is-visually-hidden">Add</span>
+											</button>
+										
+
+											<a data-contenteditbtn="" class="button button-clear button-sm text-decoration-none button-primary display-none display-inline-flex-tablet" aria-label="Edit" title="Edit This Document" data-bi-name="edit" href="https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/fundamentals/middleware/write.md" data-original_content_git_url="https://github.com/dotnet/AspNetCore.Docs/blob/live/aspnetcore/fundamentals/middleware/write.md" data-original_content_git_url_template="{repo}/blob/{branch}/aspnetcore/fundamentals/middleware/write.md" data-pr_repo="" data-pr_branch="">
+												<span class="icon margin-none" aria-hidden="true">
+													<span class="docon docon-edit-outline"></span>
+												</span>
+											</a>
+										
+
+
+										
+										<details class="popover popover-right" id="article-header-page-actions-overflow">
+											<summary class="justify-content-flex-start button button-clear button-sm button-primary" aria-label="More actions">
+												<span class="icon" aria-hidden="true">
+													<span class="docon docon-more-vertical"></span>
+												</span>
+											</summary>
+											<div class="popover-content padding-none">
+													<button data-page-action-item="overflow-mobile" type="button" class="justify-content-flex-start button-block button-sm has-inner-focus button button-clear display-none-tablet" data-bi-name="contents-expand" data-contents-button="" data-popover-close="">
+														<span class="icon">
+															<span class="docon docon-editor-list-bullet" aria-hidden="true"></span>
+														</span>
+															<span class="contents-expand-title">Table of contents</span>
+													</button>
+
+												<a id="lang-link-overflow" class="justify-content-flex-start button-sm has-inner-focus button button-clear button-block display-none-tablet" title="Read in English" data-bi-name="language-toggle" data-page-action-item="overflow-mobile" data-check-hidden="true" data-read-in-link="" hidden="" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0" data-bi="{&quot;cN&quot;:&quot;language-toggle&quot;,&quot;value&quot;:&quot;off&quot;}">
+													<span class="icon" aria-hidden="true" data-read-in-link-icon="">
+														<span class="docon docon-locale-globe"></span>
+													</span>
+													<span data-read-in-link-text="">Read in English</span>
+												</a>
+
+													<button type="button" class="collection justify-content-flex-start button button-clear button-sm has-inner-focus button-block display-none-tablet" data-list-type="collection" data-bi-name="collection" title="Add Write custom ASP.NET Core middleware | Microsoft Learn to a collection" data-page-action-item="overflow-mobile" data-check-hidden="true" data-popover-close="" data-pressed="false">
+														<span class="icon" aria-hidden="true">
+															<span class="docon docon-circle-addition"></span>
+														</span>
+														<span class="collection-status">Add</span>
+													</button>
+
+													<a data-contenteditbtn="" class="button button-clear button-block button-sm has-inner-focus justify-content-flex-start text-decoration-none display-none-tablet" aria-label="Edit" title="Edit This Document" data-bi-name="edit" href="https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/fundamentals/middleware/write.md" data-original_content_git_url="https://github.com/dotnet/AspNetCore.Docs/blob/live/aspnetcore/fundamentals/middleware/write.md" data-original_content_git_url_template="{repo}/blob/{branch}/aspnetcore/fundamentals/middleware/write.md" data-pr_repo="" data-pr_branch="">
+														<span class="icon" aria-hidden="true">
+															<span class="docon docon-edit-outline"></span>
+														</span>
+														<span>Edit</span>
+													</a>
+
+													<button class="button button-block button-clear button-sm justify-content-flex-start has-inner-focus" title="Print" type="button" aria-label="Print" data-bi-name="print" data-page-action-item="overflow-all" data-popover-close="" data-print-page="" data-check-hidden="true">
+														<span class="icon" aria-hidden="true">
+															<span class="docon docon-print"></span>
+														</span>
+														<span>Print</span>
+													</button>
+
+													<div aria-hidden="true" class="margin-none
+														border-top" data-page-action-item="overflow-all"></div>
+
+													
+														<a class="button button-clear button-sm has-inner-focus button-block text-decoration-none justify-content-flex-start share-twitter" data-bi-name="twitter" data-page-action-item="overflow-all" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0%26WT.mc_id%3Dtwitter&amp;text=Today%20I%20completed%20%22Write%20custom%20ASP.NET%20Core%20middleware%20%7C%20Microsoft%20Learn%22!%20I%27m%20so%20proud%20to%20be%20celebrating%20this%20achievement%20and%20hope%20this%20inspires%20you%20to%20start%20your%20own%20%40MicrosoftLearn%20journey!&amp;tw_p=tweetbutton&amp;url=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0%26WT.mc_id%3Dtwitter">
+															<span class="icon" aria-hidden="true">
+																<span class="docon docon-brand-twitter"></span>
+															</span>
+															<span>Twitter</span>
+														</a>
+														<a class="button button-clear button-sm has-inner-focus button-block text-decoration-none justify-content-flex-start share-linkedin" data-bi-name="linkedin" data-page-action-item="overflow-all" href="https://www.linkedin.com/feed/?shareActive=true&amp;text=Today%20I%20completed%20%22Write%20custom%20ASP.NET%20Core%20middleware%20%7C%20Microsoft%20Learn%22!%20I%27m%20so%20proud%20to%20be%20celebrating%20this%20achievement%20and%20hope%20this%20inspires%20you%20to%20start%20your%20own%20%40MicrosoftLearn%20journey!%0A%0D%0Ahttps%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0%26WT.mc_id%3Dlinkedin">
+															<span class="icon" aria-hidden="true">
+																<span class="docon docon-brand-linkedin"></span>
+															</span>
+															<span>LinkedIn</span>
+														</a>
+														<a class="button button-clear button-sm button-block has-inner-focus text-decoration-none justify-content-flex-start share-facebook" data-bi-name="facebook" data-page-action-item="overflow-all" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0%26WT.mc_id%3Dfacebook">
+															<span class="icon" aria-hidden="true">
+																<span class="docon docon-brand-facebook"></span>
+															</span>
+															<span>Facebook</span>
+														</a>
+														<a class="button button-clear button-sm button-block has-inner-focus text-decoration-none justify-content-flex-start share-email" data-bi-name="email" data-page-action-item="overflow-all" href="mailto:?subject=%5BShared%20Article%5D%20Write%20custom%20ASP.NET%20Core%20middleware%20%7C%20Microsoft%20Learn&amp;body=Today%20I%20completed%20%22Write%20custom%20ASP.NET%20Core%20middleware%20%7C%20Microsoft%20Learn%22!%20I%27m%20so%20proud%20to%20be%20celebrating%20this%20achievement%20and%20hope%20this%20inspires%20you%20to%20start%20your%20own%20%40MicrosoftLearn%20journey!%0A%0D%0Ahttps%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0%26WT.mc_id%3Demail">
+															<span class="icon" aria-hidden="true">
+																<span class="docon docon-mail-message-fill"></span>
+															</span>
+															<span>Email</span>
+														</a>
+												
+											</div>
+										</details>
+										
+									</div>
+								</div>
+							</div>
+							<!-- end article-header -->
+
+
+							<div>
+								<button type="button" class="border contents-button button button-clear button-sm is-hidden-tablet has-inner-focus" data-bi-name="contents-expand" data-contents-button="" hidden="">
+									<span class="icon">
+										<span class="docon docon-editor-list-bullet" aria-hidden="true"></span>
+									</span>
+										<span class="contents-expand-title">Table of contents</span>
+								</button>
+							</div>
+
+							<!-- end mobile-contents button  -->
+
+							<div class="content ">
+
+
+								<h1 id="write-custom-aspnet-core-middleware">Write custom ASP.NET Core middleware</h1>
+
+
+									<div class="display-flex justify-content-space-between align-items-center flex-wrap-wrap page-metadata-container">
+										<div class="margin-right-xxs">
+											<ul class="metadata page-metadata" data-bi-name="page info" lang="en-us" dir="ltr">
+													<li>
+Article													</li>
+
+													<li class="visibility-hidden-visual-diff">
+														<time class="" data-article-date="" aria-label="Article review date" datetime="2022-06-03T21:59:00.000Z" data-article-date-source="calculated">06/04/2022</time>
+													</li>
+														<li class="contributors-holder display-none-print">
+															<button aria-label="View all contributors" class="contributors-button link-button" data-bi-name="contributors" title="View all contributors">
+																	5 contributors
+															</button>
+														</li>
+											</ul>
+										</div>
+
+<div id="user-feedback" class="margin-block-xxs display-none-print" data-hide-on-archived="">
+	<button id="user-feedback-button" data-test-id="conceptual-feedback-button" class="button button-sm button-clear button-primary" type="button" data-bi-name="user-feedback-button" data-user-feedback-button="">
+		<span class="icon" aria-hidden="true">
+			<span class="docon docon-like"></span>
+		</span>
+		<span>Feedback</span>
+	</button>
+</div>
+									</div>
+
+									<div id="ms--inline-notifications" data-bi-name="inline-notification"></div>
+
+										<nav id="center-doc-outline" class="doc-outline display-none-print margin-bottom-sm" data-bi-name="intopic toc" role="navigation" aria-label="In this article"><!---->
+		<h2 id="ms--in-this-article" class="title is-6 margin-block-xs"><!---->In this article<!----></h2>
+		<ol id="content-well-in-this-article-list" class="border-left padding-left-xxs" aria-live="polite" aria-relevant="additions">
+			<!---->
+					<li class="">
+						<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-class"><!---->Middleware class<!----></a>
+					</li>
+				<!---->
+					<li class="">
+						<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-dependencies"><!---->Middleware dependencies<!----></a>
+					</li>
+				<!---->
+					<li class="">
+						<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#per-request-middleware-dependencies"><!---->Per-request middleware dependencies<!----></a>
+					</li>
+				<!---->
+					<li class="">
+						<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#additional-resources"><!---->Additional resources<!----></a>
+					</li>
+				<!---->
+		</ol>
+	<!----></nav>
+
+								<!-- <content> -->
+									<div data-moniker="aspnetcore-6.0 aspnetcore-7.0 aspnetcore-8.0">
+<p>By <a href="https://twitter.com/FiyazBinHasan" data-linktype="external">Fiyaz Hasan</a>, <a href="https://twitter.com/RickAndMSFT" data-linktype="external">Rick Anderson</a>, and <a href="https://ardalis.com/" data-linktype="external">Steve Smith</a></p>
+<p>Middleware is software that's assembled into an app pipeline to handle requests and responses. ASP.NET Core provides a rich set of built-in middleware components, but in some scenarios you might want to write a custom middleware.</p>
+<p>This topic describes how to write <em>convention-based</em> middleware. For an approach that uses strong typing and per-request activation, see <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility?view=aspnetcore-8.0" data-linktype="relative-path">Factory-based middleware activation in ASP.NET Core</a>.</p>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-class" aria-label="Section titled: Middleware class"></a><h2 id="middleware-class" class="heading-anchor">Middleware class</h2></div>
+<p>Middleware is generally encapsulated in a class and exposed with an extension method. Consider the following inline middleware, which sets the culture for the current request from a query string:</p>
+<div class="codeHeader" id="code-try-0" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" highlight-lines="8-21" data-author-content="using System.Globalization;
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.Use(async (context, next) =&gt;
+{
+    var cultureQuery = context.Request.Query[&quot;culture&quot;];
+    if (!string.IsNullOrWhiteSpace(cultureQuery))
+    {
+        var culture = new CultureInfo(cultureQuery);
+
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
+    }
+
+    // Call the next delegate/middleware in the pipeline.
+    await next(context);
+});
+
+app.Run(async (context) =&gt;
+{
+    await context.Response.WriteAsync(
+        $&quot;CurrentCulture.DisplayName: {CultureInfo.CurrentCulture.DisplayName}&quot;);
+});
+
+app.Run();
+"><span><span class="hljs-keyword">using</span> System.Globalization;
+
+<span class="hljs-keyword">var</span> builder = WebApplication.CreateBuilder(args);
+<span class="hljs-keyword">var</span> app = builder.Build();
+
+app.UseHttpsRedirection();
+</span>
+<mark>app.Use(<span class="hljs-keyword">async</span> (context, next) =&gt;
+{
+    <span class="hljs-keyword">var</span> cultureQuery = context.Request.Query[<span class="hljs-string">"culture"</span>];
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">string</span>.IsNullOrWhiteSpace(cultureQuery))
+    {
+        <span class="hljs-keyword">var</span> culture = <span class="hljs-keyword">new</span> CultureInfo(cultureQuery);
+
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
+    }
+
+    <span class="hljs-comment">// Call the next delegate/middleware in the pipeline.</span>
+    <span class="hljs-keyword">await</span> next(context);
+});</mark>
+<span>
+app.Run(<span class="hljs-keyword">async</span> (context) =&gt;
+{
+    <span class="hljs-keyword">await</span> context.Response.WriteAsync(
+        <span class="hljs-string">$"CurrentCulture.DisplayName: <span class="hljs-subst">{CultureInfo.CurrentCulture.DisplayName}</span>"</span>);
+});
+
+app.Run();
+</span></code></pre>
+<p>The preceding highlighted inline middleware is used to demonstrate creating a middleware component by calling <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.useextensions.use" class="no-loc" data-linktype="absolute-path">Microsoft.AspNetCore.Builder.UseExtensions.Use</a>. The preceding <code>Use</code> extension method adds a middleware <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/" data-linktype="absolute-path">delegate</a> defined in-line to the application's request pipeline.</p>
+<p>There are two overloads available for the <code>Use</code> extension:</p>
+<ul>
+<li>One takes a <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext" class="no-loc" data-linktype="absolute-path">HttpContext</a> and a <code>Func&lt;Task&gt;</code>. Invoke the <code>Func&lt;Task&gt;</code> without any parameters.</li>
+<li>The other takes a <code>HttpContext</code> and a <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.requestdelegate" class="no-loc" data-linktype="absolute-path">RequestDelegate</a>. Invoke the <code>RequestDelegate</code> by passing the <code>HttpContext</code>.</li>
+</ul>
+<p>Prefer using the later overload as it saves two internal per-request allocations that are required when using the other overload.</p>
+<p>Test the middleware by passing in the culture. For example, request <code>https://localhost:5001/?culture=es-es</code>.</p>
+<p>For ASP.NET Core's built-in localization support, see <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-8.0" data-linktype="relative-path">Globalization and localization in ASP.NET Core</a>.</p>
+<!--?culture=de-de ?culture=fr-fr /?culture=zh-hk -->
+<p>The following code moves the middleware delegate to a class:</p>
+<div class="codeHeader" id="code-try-1" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="using System.Globalization;
+
+namespace Middleware.Example;
+
+public class RequestCultureMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public RequestCultureMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        var cultureQuery = context.Request.Query[&quot;culture&quot;];
+        if (!string.IsNullOrWhiteSpace(cultureQuery))
+        {
+            var culture = new CultureInfo(cultureQuery);
+
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+
+        // Call the next delegate/middleware in the pipeline.
+        await _next(context);
+    }
+}
+"><span><span class="hljs-keyword">using</span> System.Globalization;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Middleware.Example</span>;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestCultureMiddleware</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> RequestDelegate _next;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RequestCultureMiddleware</span>(<span class="hljs-params">RequestDelegate next</span>)</span>
+    {
+        _next = next;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">InvokeAsync</span>(<span class="hljs-params">HttpContext context</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> cultureQuery = context.Request.Query[<span class="hljs-string">"culture"</span>];
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">string</span>.IsNullOrWhiteSpace(cultureQuery))
+        {
+            <span class="hljs-keyword">var</span> culture = <span class="hljs-keyword">new</span> CultureInfo(cultureQuery);
+
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+
+        <span class="hljs-comment">// Call the next delegate/middleware in the pipeline.</span>
+        <span class="hljs-keyword">await</span> _next(context);
+    }
+}
+</span></code></pre>
+<p>The middleware class must include:</p>
+<ul>
+<li>A public constructor with a parameter of type <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.requestdelegate" class="no-loc" data-linktype="absolute-path">RequestDelegate</a>.</li>
+<li>A public method named <code>Invoke</code> or <code>InvokeAsync</code>. This method must:
+<ul>
+<li>Return a <code>Task</code>.</li>
+<li>Accept a first parameter of type <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext" class="no-loc" data-linktype="absolute-path">HttpContext</a>.</li>
+</ul>
+</li>
+</ul>
+<p>Additional parameters for the constructor and <code>Invoke</code>/<code>InvokeAsync</code> are populated by <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0" data-linktype="relative-path">dependency injection (DI)</a>.</p>
+<p>Typically, an extension method is created to expose the middleware through <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder" class="no-loc" data-linktype="absolute-path">IApplicationBuilder</a>:</p>
+<div class="codeHeader" id="code-try-2" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" highlight-lines="30-99" data-author-content="using System.Globalization;
+
+namespace Middleware.Example;
+
+public class RequestCultureMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public RequestCultureMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        var cultureQuery = context.Request.Query[&quot;culture&quot;];
+        if (!string.IsNullOrWhiteSpace(cultureQuery))
+        {
+            var culture = new CultureInfo(cultureQuery);
+
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+
+        // Call the next delegate/middleware in the pipeline.
+        await _next(context);
+    }
+}
+
+public static class RequestCultureMiddlewareExtensions
+{
+    public static IApplicationBuilder UseRequestCulture(
+        this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware&lt;RequestCultureMiddleware&gt;();
+    }
+}
+"><span><span class="hljs-keyword">using</span> System.Globalization;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Middleware.Example</span>;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestCultureMiddleware</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> RequestDelegate _next;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RequestCultureMiddleware</span>(<span class="hljs-params">RequestDelegate next</span>)</span>
+    {
+        _next = next;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">InvokeAsync</span>(<span class="hljs-params">HttpContext context</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> cultureQuery = context.Request.Query[<span class="hljs-string">"culture"</span>];
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">string</span>.IsNullOrWhiteSpace(cultureQuery))
+        {
+            <span class="hljs-keyword">var</span> culture = <span class="hljs-keyword">new</span> CultureInfo(cultureQuery);
+
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+
+        <span class="hljs-comment">// Call the next delegate/middleware in the pipeline.</span>
+        <span class="hljs-keyword">await</span> _next(context);
+    }
+}
+</span>
+<mark><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestCultureMiddlewareExtensions</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IApplicationBuilder <span class="hljs-title">UseRequestCulture</span>(<span class="hljs-params">
+        <span class="hljs-keyword">this</span> IApplicationBuilder builder</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> builder.UseMiddleware&lt;RequestCultureMiddleware&gt;();
+    }
+}
+</mark>
+<span></span></code></pre>
+<p>The following code calls the middleware from <code>Program.cs</code>:</p>
+<div class="codeHeader" id="code-try-3" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" highlight-lines="9" data-author-content="using Middleware.Example;
+using System.Globalization;
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.UseRequestCulture();
+
+app.Run(async (context) =&gt;
+{
+    await context.Response.WriteAsync(
+        $&quot;CurrentCulture.DisplayName: {CultureInfo.CurrentCulture.DisplayName}&quot;);
+});
+
+app.Run();
+"><span><span class="hljs-keyword">using</span> Middleware.Example;
+<span class="hljs-keyword">using</span> System.Globalization;
+
+<span class="hljs-keyword">var</span> builder = WebApplication.CreateBuilder(args);
+<span class="hljs-keyword">var</span> app = builder.Build();
+
+app.UseHttpsRedirection();
+</span>
+<mark>app.UseRequestCulture();</mark>
+<span>
+app.Run(<span class="hljs-keyword">async</span> (context) =&gt;
+{
+    <span class="hljs-keyword">await</span> context.Response.WriteAsync(
+        <span class="hljs-string">$"CurrentCulture.DisplayName: <span class="hljs-subst">{CultureInfo.CurrentCulture.DisplayName}</span>"</span>);
+});
+
+app.Run();
+</span></code></pre>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-dependencies" aria-label="Section titled: Middleware dependencies"></a><h2 id="middleware-dependencies" class="heading-anchor">Middleware dependencies</h2></div>
+<p>Middleware should follow the <a href="https://learn.microsoft.com/en-us/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies" data-linktype="absolute-path">Explicit Dependencies Principle</a> by exposing its dependencies in its constructor. Middleware is constructed once per <em>application lifetime</em>.</p>
+<p>Middleware components can resolve their dependencies from <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0" data-linktype="relative-path">dependency injection (DI)</a> through constructor parameters. <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.usemiddlewareextensions.usemiddleware" class="no-loc" data-linktype="absolute-path">UseMiddleware</a> can also accept additional parameters directly.</p>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#per-request-middleware-dependencies" aria-label="Section titled: Per-request middleware dependencies"></a><h2 id="per-request-middleware-dependencies" class="heading-anchor">Per-request middleware dependencies</h2></div>
+<p>Middleware is constructed at app startup and therefore has application life
+time. <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#scoped" data-linktype="absolute-path">Scoped lifetime</a> services used by middleware constructors aren't shared with other dependency-injected types during each request. To share a <em>scoped</em> service between middleware and other types, add these services to the <code>InvokeAsync</code> method's signature. The <code>InvokeAsync</code> method can accept additional parameters that are populated by DI:</p>
+<div class="codeHeader" id="code-try-4" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="namespace Middleware.Example;
+
+public class MyCustomMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public MyCustomMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    // IMessageWriter is injected into InvokeAsync
+    public async Task InvokeAsync(HttpContext httpContext, IMessageWriter svc)
+    {
+        svc.Write(DateTime.Now.Ticks.ToString());
+        await _next(httpContext);
+    }
+}
+
+public static class MyCustomMiddlewareExtensions
+{
+    public static IApplicationBuilder UseMyCustomMiddleware(
+        this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware&lt;MyCustomMiddleware&gt;();
+    }
+}
+"><span><span class="hljs-keyword">namespace</span> <span class="hljs-title">Middleware.Example</span>;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyCustomMiddleware</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> RequestDelegate _next;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyCustomMiddleware</span>(<span class="hljs-params">RequestDelegate next</span>)</span>
+    {
+        _next = next;
+    }
+
+    <span class="hljs-comment">// IMessageWriter is injected into InvokeAsync</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">InvokeAsync</span>(<span class="hljs-params">HttpContext httpContext, IMessageWriter svc</span>)</span>
+    {
+        svc.Write(DateTime.Now.Ticks.ToString());
+        <span class="hljs-keyword">await</span> _next(httpContext);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyCustomMiddlewareExtensions</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IApplicationBuilder <span class="hljs-title">UseMyCustomMiddleware</span>(<span class="hljs-params">
+        <span class="hljs-keyword">this</span> IApplicationBuilder builder</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> builder.UseMiddleware&lt;MyCustomMiddleware&gt;();
+    }
+}
+</span></code></pre>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#lifetime-and-registration-options" data-linktype="relative-path">Lifetime and registration options</a> contains a complete sample of middleware with <em>scoped</em> lifetime services.</p>
+<p>The following code is used to test the preceding middleware:</p>
+<div class="codeHeader" id="code-try-5" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" highlight-lines="4,10" data-author-content="using Middleware.Example;
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped&lt;IMessageWriter, LoggingMessageWriter&gt;();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.UseMyCustomMiddleware();
+
+app.MapGet(&quot;/&quot;, () =&gt; &quot;Hello World!&quot;);
+
+app.Run();
+"><span><span class="hljs-keyword">using</span> Middleware.Example;
+<span class="hljs-keyword">var</span> builder = WebApplication.CreateBuilder(args);
+</span>
+<mark>builder.Services.AddScoped&lt;IMessageWriter, LoggingMessageWriter&gt;();</mark>
+<span>
+<span class="hljs-keyword">var</span> app = builder.Build();
+
+app.UseHttpsRedirection();
+</span>
+<mark>app.UseMyCustomMiddleware();</mark>
+<span>
+app.MapGet(<span class="hljs-string">"/"</span>, () =&gt; <span class="hljs-string">"Hello World!"</span>);
+
+app.Run();
+</span></code></pre>
+<p>The <code>IMessageWriter</code> interface and implementation:</p>
+<div class="codeHeader" id="code-try-6" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="namespace Middleware.Example;
+
+public interface IMessageWriter
+{
+    void Write(string message);
+}
+
+public class LoggingMessageWriter : IMessageWriter
+{
+
+    private readonly ILogger&lt;LoggingMessageWriter&gt; _logger;
+
+    public LoggingMessageWriter(ILogger&lt;LoggingMessageWriter&gt; logger) =&gt;
+        _logger = logger;
+
+    public void Write(string message) =&gt;
+        _logger.LogInformation(message);
+}
+"><span><span class="hljs-keyword">namespace</span> <span class="hljs-title">Middleware.Example</span>;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IMessageWriter</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Write</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LoggingMessageWriter</span> : <span class="hljs-title">IMessageWriter</span>
+{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> ILogger&lt;LoggingMessageWriter&gt; _logger;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LoggingMessageWriter</span>(<span class="hljs-params">ILogger&lt;LoggingMessageWriter&gt; logger</span>)</span> =&gt;
+        _logger = logger;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message</span>)</span> =&gt;
+        _logger.LogInformation(message);
+}
+</span></code></pre>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#additional-resources" aria-label="Section titled: Additional resources"></a><h2 id="additional-resources" class="heading-anchor">Additional resources</h2></div>
+<ul>
+<li><a href="https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/middleware/write/6sample" data-linktype="external">Sample code used in this article</a></li>
+<li><a href="https://github.com/dotnet/aspnetcore/blob/main/src/Http/Http.Abstractions/src/Extensions/UseExtensions.cs" data-linktype="external">UseExtensions source on GitHub</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#lifetime-and-registration-options" data-linktype="relative-path">Lifetime and registration options</a> contains a complete sample of middleware with <em>scoped</em>, <em>transient</em>, and <em>singleton</em> lifetime services.</li>
+<li><a href="https://www.stevejgordon.co.uk/how-is-the-asp-net-core-middleware-pipeline-built" data-linktype="external">DEEP DIVE: HOW IS THE ASP.NET CORE MIDDLEWARE PIPELINE BUILT</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0" data-linktype="relative-path">ASP.NET Core Middleware</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/test/middleware?view=aspnetcore-8.0" data-linktype="relative-path">Test ASP.NET Core middleware</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/migration/http-modules?view=aspnetcore-8.0" data-linktype="relative-path">Migrate HTTP handlers and modules to ASP.NET Core middleware</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-8.0" data-linktype="relative-path">App startup in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/request-features?view=aspnetcore-8.0" data-linktype="relative-path">Request Features in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility?view=aspnetcore-8.0" data-linktype="relative-path">Factory-based middleware activation in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility-third-party-container?view=aspnetcore-8.0" data-linktype="relative-path">Middleware activation with a third-party container in ASP.NET Core</a></li>
+</ul>
+</div>
+<div data-moniker="aspnetcore-3.1 aspnetcore-5.0">
+<p>By <a href="https://twitter.com/RickAndMSFT" data-linktype="external">Rick Anderson</a> and <a href="https://ardalis.com/" data-linktype="external">Steve Smith</a></p>
+<p>Middleware is software that's assembled into an app pipeline to handle requests and responses. ASP.NET Core provides a rich set of built-in middleware components, but in some scenarios you might want to write a custom middleware.</p>
+<div class="alert is-info">
+<p class="alert-title"><span class="docon docon-status-error-outline" aria-hidden="true"></span> Note</p>
+<p>This topic describes how to write <em>convention-based</em> middleware. For an approach that uses strong typing and per-request activation, see <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility?view=aspnetcore-8.0" data-linktype="relative-path">Factory-based middleware activation in ASP.NET Core</a>.</p>
+</div>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-class-1" aria-label="Section titled: Middleware class"></a><h2 class="heading-anchor" data-id="middleware-class-1">Middleware class</h2></div>
+<p>Middleware is generally encapsulated in a class and exposed with an extension method. Consider the following middleware, which sets the culture for the current request from a query string:</p>
+<div class="codeHeader" id="code-try-7" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="public class Startup
+{
+    public void Configure(IApplicationBuilder app)
+    {
+        app.Use(async (context, next) =&gt;
+        {
+            var cultureQuery = context.Request.Query[&quot;culture&quot;];
+            if (!string.IsNullOrWhiteSpace(cultureQuery))
+            {
+                var culture = new CultureInfo(cultureQuery);
+
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+            }
+
+            // Call the next delegate/middleware in the pipeline
+            await next();
+        });
+
+        app.Run(async (context) =&gt;
+        {
+            await context.Response.WriteAsync(
+                $&quot;Hello {CultureInfo.CurrentCulture.DisplayName}&quot;);
+        });
+
+    }
+}
+"><span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)</span>
+    {
+        app.Use(<span class="hljs-keyword">async</span> (context, next) =&gt;
+        {
+            <span class="hljs-keyword">var</span> cultureQuery = context.Request.Query[<span class="hljs-string">"culture"</span>];
+            <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">string</span>.IsNullOrWhiteSpace(cultureQuery))
+            {
+                <span class="hljs-keyword">var</span> culture = <span class="hljs-keyword">new</span> CultureInfo(cultureQuery);
+
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+            }
+
+            <span class="hljs-comment">// Call the next delegate/middleware in the pipeline</span>
+            <span class="hljs-keyword">await</span> next();
+        });
+
+        app.Run(<span class="hljs-keyword">async</span> (context) =&gt;
+        {
+            <span class="hljs-keyword">await</span> context.Response.WriteAsync(
+                <span class="hljs-string">$"Hello <span class="hljs-subst">{CultureInfo.CurrentCulture.DisplayName}</span>"</span>);
+        });
+
+    }
+}
+</span></code></pre>
+<p>The preceding sample code is used to demonstrate creating a middleware component. For ASP.NET Core's built-in localization support, see <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-8.0" data-linktype="relative-path">Globalization and localization in ASP.NET Core</a>.</p>
+<p>Test the middleware by passing in the culture. For example, request <code>https://localhost:5001/?culture=no</code>.</p>
+<p>The following code moves the middleware delegate to a class:</p>
+<div class="codeHeader" id="code-try-8" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="using Microsoft.AspNetCore.Http;
+using System.Globalization;
+using System.Threading.Tasks;
+
+namespace Culture
+{
+    public class RequestCultureMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public RequestCultureMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            var cultureQuery = context.Request.Query[&quot;culture&quot;];
+            if (!string.IsNullOrWhiteSpace(cultureQuery))
+            {
+                var culture = new CultureInfo(cultureQuery);
+
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+
+            }
+
+            // Call the next delegate/middleware in the pipeline
+            await _next(context);
+        }
+    }
+}
+"><span><span class="hljs-keyword">using</span> Microsoft.AspNetCore.Http;
+<span class="hljs-keyword">using</span> System.Globalization;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Culture</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestCultureMiddleware</span>
+    {
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> RequestDelegate _next;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RequestCultureMiddleware</span>(<span class="hljs-params">RequestDelegate next</span>)</span>
+        {
+            _next = next;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">InvokeAsync</span>(<span class="hljs-params">HttpContext context</span>)</span>
+        {
+            <span class="hljs-keyword">var</span> cultureQuery = context.Request.Query[<span class="hljs-string">"culture"</span>];
+            <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">string</span>.IsNullOrWhiteSpace(cultureQuery))
+            {
+                <span class="hljs-keyword">var</span> culture = <span class="hljs-keyword">new</span> CultureInfo(cultureQuery);
+
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+
+            }
+
+            <span class="hljs-comment">// Call the next delegate/middleware in the pipeline</span>
+            <span class="hljs-keyword">await</span> _next(context);
+        }
+    }
+}
+</span></code></pre>
+<p>The middleware class must include:</p>
+<ul>
+<li>A public constructor with a parameter of type <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.requestdelegate" class="no-loc" data-linktype="absolute-path">RequestDelegate</a>.</li>
+<li>A public method named <code>Invoke</code> or <code>InvokeAsync</code>. This method must:
+<ul>
+<li>Return a <code>Task</code>.</li>
+<li>Accept a first parameter of type <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext" class="no-loc" data-linktype="absolute-path">HttpContext</a>.</li>
+</ul>
+</li>
+</ul>
+<p>Additional parameters for the constructor and <code>Invoke</code>/<code>InvokeAsync</code> are populated by <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0" data-linktype="relative-path">dependency injection (DI)</a>.</p>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-dependencies-1" aria-label="Section titled: Middleware dependencies"></a><h2 class="heading-anchor" data-id="middleware-dependencies-1">Middleware dependencies</h2></div>
+<p>Middleware should follow the <a href="https://learn.microsoft.com/en-us/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies" data-linktype="absolute-path">Explicit Dependencies Principle</a> by exposing its dependencies in its constructor. Middleware is constructed once per <em>application lifetime</em>. See the <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#per-request-middleware-dependencies" data-linktype="self-bookmark">Per-request middleware dependencies</a> section if you need to share services with middleware within a request.</p>
+<p>Middleware components can resolve their dependencies from <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0" data-linktype="relative-path">dependency injection (DI)</a> through constructor parameters. <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.usemiddlewareextensions.usemiddleware" class="no-loc" data-linktype="absolute-path">UseMiddleware</a> can also accept additional parameters directly.</p>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#per-request-middleware-dependencies-1" aria-label="Section titled: Per-request middleware dependencies"></a><h2 class="heading-anchor" data-id="per-request-middleware-dependencies-1">Per-request middleware dependencies</h2></div>
+<p>Because middleware is constructed at app startup, not per-request, <em>scoped</em> lifetime services used by middleware constructors aren't shared with other dependency-injected types during each request. If you must share a <em>scoped</em> service between your middleware and other types, add these services to the <code>InvokeAsync</code> method's signature. The <code>InvokeAsync</code> method can accept additional parameters that are populated by DI:</p>
+<div class="codeHeader" id="code-try-9" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="public class CustomMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public CustomMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    // IMyScopedService is injected into InvokeAsync
+    public async Task InvokeAsync(HttpContext httpContext, IMyScopedService svc)
+    {
+        svc.MyProperty = 1000;
+        await _next(httpContext);
+    }
+}
+"><span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomMiddleware</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> RequestDelegate _next;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomMiddleware</span>(<span class="hljs-params">RequestDelegate next</span>)</span>
+    {
+        _next = next;
+    }
+
+    <span class="hljs-comment">// IMyScopedService is injected into InvokeAsync</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">InvokeAsync</span>(<span class="hljs-params">HttpContext httpContext, IMyScopedService svc</span>)</span>
+    {
+        svc.MyProperty = <span class="hljs-number">1000</span>;
+        <span class="hljs-keyword">await</span> _next(httpContext);
+    }
+}
+</span></code></pre>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#lifetime-and-registration-options" data-linktype="relative-path">Lifetime and registration options</a> contains a complete sample of middleware with <em>scoped</em> lifetime services.</p>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#middleware-extension-method" aria-label="Section titled: Middleware extension method"></a><h2 class="heading-anchor" data-id="middleware-extension-method">Middleware extension method</h2></div>
+<p>The following extension method exposes the middleware through <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder" class="no-loc" data-linktype="absolute-path">IApplicationBuilder</a>:</p>
+<div class="codeHeader" id="code-try-10" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" data-author-content="using Microsoft.AspNetCore.Builder;
+
+namespace Culture
+{
+    public static class RequestCultureMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseRequestCulture(
+            this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware&lt;RequestCultureMiddleware&gt;();
+        }
+    }
+}
+"><span><span class="hljs-keyword">using</span> Microsoft.AspNetCore.Builder;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Culture</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestCultureMiddlewareExtensions</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IApplicationBuilder <span class="hljs-title">UseRequestCulture</span>(<span class="hljs-params">
+            <span class="hljs-keyword">this</span> IApplicationBuilder builder</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> builder.UseMiddleware&lt;RequestCultureMiddleware&gt;();
+        }
+    }
+}
+</span></code></pre>
+<p>The following code calls the middleware from <code>Startup.Configure</code>:</p>
+<div class="codeHeader" id="code-try-11" data-bi-name="code-header"><span class="language">C#</span>
+		<button type="button" class="action position-relative display-none-print" data-bi-name="copy">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-edit-copy"></span>
+			</span>
+			<span>Copy</span>
+			<div class="successful-copy-alert position-absolute right-0 top-0 left-0 bottom-0 display-flex align-items-center justify-content-center has-text-success-invert has-background-success is-transparent" aria-hidden="true">
+				<span class="icon font-size-lg">
+					<span class="docon docon-check-mark"></span>
+				</span>
+			</div>
+		</button>
+	</div><pre class="has-inner-focus"><code class="lang-csharp" highlight-lines="5" data-author-content="public class Startup
+{
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseRequestCulture();
+
+        app.Run(async (context) =&gt;
+        {
+            await context.Response.WriteAsync(
+                $&quot;Hello {CultureInfo.CurrentCulture.DisplayName}&quot;);
+        });
+    }
+}
+"><span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)</span>
+    {</span>
+<mark>        app.UseRequestCulture();</mark>
+<span>
+        app.Run(<span class="hljs-keyword">async</span> (context) =&gt;
+        {
+            <span class="hljs-keyword">await</span> context.Response.WriteAsync(
+                <span class="hljs-string">$"Hello <span class="hljs-subst">{CultureInfo.CurrentCulture.DisplayName}</span>"</span>);
+        });
+    }
+}
+</span></code></pre>
+<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-8.0#additional-resources-1" aria-label="Section titled: Additional resources"></a><h2 class="heading-anchor" data-id="additional-resources-1">Additional resources</h2></div>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#lifetime-and-registration-options" data-linktype="relative-path">Lifetime and registration options</a> contains a complete sample of middleware with <em>scoped</em>, <em>transient</em>, and <em>singleton</em> lifetime services.</li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0" data-linktype="relative-path">ASP.NET Core Middleware</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/test/middleware?view=aspnetcore-8.0" data-linktype="relative-path">Test ASP.NET Core middleware</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/migration/http-modules?view=aspnetcore-8.0" data-linktype="relative-path">Migrate HTTP handlers and modules to ASP.NET Core middleware</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-8.0" data-linktype="relative-path">App startup in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/request-features?view=aspnetcore-8.0" data-linktype="relative-path">Request Features in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility?view=aspnetcore-8.0" data-linktype="relative-path">Factory-based middleware activation in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility-third-party-container?view=aspnetcore-8.0" data-linktype="relative-path">Middleware activation with a third-party container in ASP.NET Core</a></li>
+</ul>
+</div>
+
+							</div>
+
+							<div id="assertive-live-region" role="alert" aria-live="assertive" class="visually-hidden" aria-relevant="additions" aria-atomic="true"></div>
+							<div id="polite-live-region" role="status" aria-live="polite" class="visually-hidden" aria-relevant="additions" aria-atomic="true"></div>
+							<!-- </content> -->
+
+						</main>
+
+
+
+
+
+						<!-- recommendations section -->
+						<!-- end recommendations section -->
+
+						<!-- feedback section -->
+<section class="position-relative margin-top-lg border border-radius padding-xxs" data-bi-name="open-source-feedback-section" data-open-source-feedback-section="">
+	<div class="display-flex flex-direction-column flex-direction-row-tablet">
+		<div class="width-450-tablet padding-inline-xs padding-inline-xs-tablet padding-top-xs padding-bottom-sm padding-top-xs-tablet background-color-body-medium">
+			<div class="display-flex flex-direction-column">
+				<div class="padding-bottom-xxs">
+					<span class="icon margin-right-xxs" aria-hidden="true">
+						<span class="docon docon-brand-github"></span>
+					</span>
+					<span class="font-weight-semibold">Collaborate with us on GitHub					</span>
+				</div>
+				<span class="line-height-normal">
+					The source for this content can be found on GitHub, where you can also create and review issues and pull requests. For more information, see <a href="https://learn.microsoft.com/contribute/content/dotnet/dotnet-contribute">our contributor guide</a>.
+				</span>
+			</div>
+		</div>
+		<div class="display-flex gap-xs width-full-tablet flex-direction-column padding-xs justify-content-space-evenly">
+			<div class="media">
+				<div class="media-left">
+					<div class="image image-36x36" data-open-source-image-container="">
+						<img class="theme-display is-light" src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/logo_net.svg" aria-hidden="true" data-open-source-image-light="">
+						<img class="theme-display is-dark is-high-contrast" src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/logo_net.svg" aria-hidden="true" data-open-source-image-dark="">
+					</div>
+					</div>
+				
+				<div class="media-content">
+					<p class="font-size-xl font-weight-semibold margin-bottom-xxs">ASP.NET Core feedback</p>
+					<div class="display-flex gap-xs flex-direction-column">
+						<p class="line-height-normal">The ASP.NET Core documentation is open source. Provide feedback here.</p>
+						<div class="display-flex gap-xs flex-direction-column">
+							<a href="https://github.com/dotnet/aspnetcore.docs/issues/new?template=customer-feedback.yml&amp;pageUrl=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0&amp;pageQueryParams=%3Fview%3Daspnetcore-8.0&amp;contentSourceUrl=https%3A%2F%2Fgithub.com%2Fdotnet%2FAspNetCore.Docs%2Fblob%2Fmain%2Faspnetcore%2Ffundamentals%2Fmiddleware%2Fwrite.md&amp;documentVersionIndependentId=cd22a135-4446-79f5-89db-b741bd44a720&amp;feedback=%0A%0A%5BEnter+feedback+here%5D%0A&amp;author=Rick-Anderson&amp;metadata=*+ID%3A+13e2d968-17a6-1a50-53cd-1d6b9ad0276d+%0A*+Product%3A+**aspnet-core**%0A*+Technology%3A+**aspnetcore-fundamentals**&amp;labels=Source+-+Docs.ms%2C%3Awatch%3A+Not+Triaged" data-github-link="">
+								<span class="icon margin-right-xxs" aria-hidden="true">
+									<span class="docon docon-bug"></span>
+								</span>
+								<span>Open a documentation issue</span>
+							</a>
+							<a href="https://github.com/dotnet/aspnetcore/blob/main/CONTRIBUTING.md" class="display-block margin-top-auto font-size-md" data-feedback-product-url="">
+								<span class="icon margin-right-xxs" aria-hidden="true">
+									<span class="docon docon-feedback"></span>
+								</span>
+								<span>Provide product feedback</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="feedback-section position-relative" data-bi-name="feedback-section" hidden="">
+    <h2 id="feedback" class="title is-3 margin-top-sm">Feedback</h2>
+
+    <div class="alert choose-feedback-type padding-bottom-sm">
+        <p id="send-feedback-about">Submit and view feedback for</p>
+
+        <div class="choose-feedback-buttons buttons margin-top-xs">
+                <a class="button has-external-link-indicator feedback-type-product" aria-label="Send feedback about this product" href="https://github.com/dotnet/aspnetcore/blob/main/CONTRIBUTING.md" data-bi-name="product-feedback">
+                    <span>This product</span>
+                </a>
+			<a class="button feedback-type-product github-link" aria-label="Send feedback about this page" data-bi-name="create-issue-on-github">
+				<span class="icon" aria-hidden="true">
+					<span class="docon docon-brand-github"></span>
+				</span>
+				<span>This page</span>
+			</a>
+        </div>
+    </div>
+
+    <div class="action-container display-flex justify-content-flex-end margin-block-xxs">
+        <a class="view-on-github has-external-link-indicator" data-bi-name="view-on-github" href="https://github.com/dotnet/AspNetCore.Docs/issues">
+            <span aria-hidden="true" class="docon docon-brand-github"></span>
+            <span>View all page feedback</span>
+        </a>
+    </div>
+</section>
+						<!-- end feedback section -->
+
+						<!-- feedback report section -->
+						<!-- end feedback report section -->
+
+							<div id="ms--additional-resources-mobile" role="complementary" aria-label="Additional resources" class="display-none-desktop display-none-print">
+								<hr class="hr">
+								<h2 id="ms--additional-resources-mobile-heading" class="title is-3">Additional resources</h2>
+								<section id="right-rail-recommendations-mobile" data-bi-name="recommendations"><!---->
+		<hr class="hr display-none display-block-desktop">
+		<article class="margin-top-md margin-top-sm-desktop">
+			
+		<p class="font-weight-semibold font-size-md display-flex align-items-center">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-book-art64"></span>
+			</span>
+			Documentation
+		</p>
+	
+			<div class="margin-top-xs ">
+				
+		<ul aria-live="polite" aria-relevant="additions" id="right-rail-recommendations-list-0">
+			<!---->
+					<li class="padding-none margin-top-xs margin-bottom-none position-relative ">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?source=recommendations" data-bi-name="right-rail-recommendation-item-0">
+						ASP.NET Core Middleware
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn about ASP.NET Core middleware and the request pipeline.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative ">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/middleware?source=recommendations" data-bi-name="right-rail-recommendation-item-1">
+						Response Caching Middleware in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how to configure and use Response Caching Middleware in ASP.NET Core.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative ">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?source=recommendations" data-bi-name="right-rail-recommendation-item-2">
+						Filters in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how filters work and how to use them in ASP.NET Core.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?source=recommendations" data-bi-name="right-rail-recommendation-item-3">
+						Handle errors in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Discover how to handle errors in ASP.NET Core apps.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?source=recommendations" data-bi-name="right-rail-recommendation-item-4">
+						Rate limiting middleware in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how limit requests in ASP.NET Core apps
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors?source=recommendations" data-bi-name="right-rail-recommendation-item-5">
+						Handle errors in ASP.NET Core web APIs
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn about error handling with ASP.NET Core web APIs.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/request-response?source=recommendations" data-bi-name="right-rail-recommendation-item-6">
+						Request and Response operations in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how to read the request body and write the response body in ASP.NET Core.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters?source=recommendations" data-bi-name="right-rail-recommendation-item-7">
+						Filters in Minimal API apps
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Use filters in Minimal API apps
+		</p>
+	
+					</li>
+				<!---->
+		</ul>
+	
+			</div>
+			<!---->
+				
+		<button type="button" aria-expanded="false" data-show-more="" class="link-button font-weight-semibold font-size-sm margin-top-sm" aria-controls="right-rail-recommendations-list-0" data-title="Show 5 more" data-bi-name="show-more-btn">
+			<span class="show-more-text "><!---->Show 5 more<!----></span>
+			
+		</button>
+	
+		  <!---->
+		</article>
+	<!----></section>
+								<section id="right-rail-training-mobile" data-bi-name="learning-resources-card" hidden=""></section>
+								<section id="right-rail-events-mobile" data-bi-name="events-card" hidden=""></section>
+								<section id="right-rail-qna-mobile" data-bi-name="qna-link-card" hidden=""></section>
+							</div>
+
+						<div class="border-top is-visible-interactive has-default-focus margin-top-sm ">
+
+
+
+	<footer id="footer-interactive" data-bi-name="footer" class="footer-layout">
+	<div class="display-flex gap-xs flex-wrap-wrap is-full-height padding-right-lg-desktop">
+			<a data-mscc-ic="false" class="locale-selector-link button button-sm button-clear flex-shrink-0" href="https://learn.microsoft.com/en-us/locale?target=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0" data-bi-name="select-locale" aria-label="Content language selector. Currently set to English (United States).">
+					<span class="icon" aria-hidden="true">
+						<span class="docon docon-world"></span>
+					</span>
+					<span class="local-selector-link-text">English (United States)</span></a>
+		<div class="flex-shrink-0">
+<div class="dropdown has-caret-up">
+	<button class="dropdown-trigger button button-clear button-sm has-inner-focus theme-dropdown-trigger" aria-controls="theme-menu-interactive" aria-expanded="false" title="Theme" data-bi-name="theme">
+		<span class="icon">
+			<span class="docon docon-sun" aria-hidden="true"></span>
+		</span>
+		<span>Theme</span>
+		<span class="icon expanded-indicator" aria-hidden="true">
+			<span class="docon docon-chevron-down-light"></span>
+		</span>
+	</button>
+	<div class="dropdown-menu" id="theme-menu-interactive" role="menu">
+		<ul class="theme-selector padding-xxs" role="none">
+			<li class="theme display-block" role="menuitem">
+				<button class="button button-clear button-sm theme-control button-block justify-content-flex-start is-selected" data-theme-to="light" aria-pressed="true">
+					<span class="theme-light margin-right-xxs">
+						<span class="theme-selector-icon css-variable-support border display-inline-block has-body-background" aria-hidden="true">
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rect>
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rect>
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect>
+								<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"></rect>
+								<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"></rect>
+							</svg>
+						</span>
+					</span>
+					<span>
+Light					</span>
+				</button>
+			</li>
+			<li class="theme display-block" role="menuitem">
+				<button class="button button-clear button-sm theme-control button-block justify-content-flex-start" data-theme-to="dark" aria-pressed="false">
+					<span class="theme-dark margin-right-xxs">
+						<span class="border theme-selector-icon css-variable-support display-inline-block has-body-background" aria-hidden="true">
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rect>
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rect>
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect>
+								<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"></rect>
+								<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"></rect>
+							</svg>
+						</span>
+					</span>
+					<span>
+Dark					</span>
+				</button>
+			</li>
+			<li class="theme display-block" role="menuitem">
+				<button class="button button-clear button-sm theme-control button-block justify-content-flex-start" data-theme-to="high-contrast" aria-pressed="false">
+					<span class="theme-high-contrast margin-right-xxs">
+						<span class="border theme-selector-icon css-variable-support display-inline-block has-body-background" aria-hidden="true">
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rect>
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rect>
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect>
+								<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"></rect>
+								<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"></rect>
+							</svg>
+						</span>
+					</span>
+					<span>
+High contrast					</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>
+		</div>
+	</div>
+	<ul class="links" data-bi-name="footerlinks">
+		<li class="manage-cookies-holder" hidden=""></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://learn.microsoft.com/en-us/previous-versions/" data-bi-name="archivelink">Previous Versions</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://techcommunity.microsoft.com/t5/microsoft-learn-blog/bg-p/MicrosoftLearnBlog" data-bi-name="bloglink">Blog</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://learn.microsoft.com/en-us/contribute/" data-bi-name="contributorGuide">Contribute</a></li>
+					<li><a class="external-link-indicator" data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?LinkId=521839" data-bi-name="privacy">Privacy</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://learn.microsoft.com/en-us/legal/termsofuse" data-bi-name="termsofuse">Terms of Use</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://www.microsoft.com/legal/intellectualproperty/Trademarks/" data-bi-name="trademarks">Trademarks</a></li>
+		<li>© Microsoft 2023</li>
+	</ul>
+</footer>
+						</div>
+
+					</div>
+
+						<div id="ms--additional-resources" class="right-container column is-4-desktop display-none display-block-desktop" data-bi-name="pageactions" role="complementary" aria-label="Additional resources">
+							<div id="affixed-right-container" class="margin-top-sm-tablet position-sticky" data-bi-name="right-column" style="top: 36px; bottom: 36px;">
+								<h2 id="ms--additional-resources-heading" class="title is-6 margin-top-md">Additional resources</h2>
+								<section id="right-rail-events" data-bi-name="events-card" hidden=""></section>
+								<section id="right-rail-training" data-bi-name="learning-resources-card" hidden=""></section>
+								<section id="right-rail-recommendations" data-bi-name="recommendations"><!---->
+		<hr class="hr display-none display-block-desktop">
+		<article class="margin-top-md margin-top-sm-desktop">
+			
+		<p class="font-weight-semibold font-size-md display-flex align-items-center">
+			<span class="icon margin-right-xxs" aria-hidden="true">
+				<span class="docon docon-book-art64"></span>
+			</span>
+			Documentation
+		</p>
+	
+			<div class="margin-top-xs ">
+				
+		<ul aria-live="polite" aria-relevant="additions" id="right-rail-recommendations-list-1">
+			<!---->
+					<li class="padding-none margin-top-xs margin-bottom-none position-relative ">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?source=recommendations" data-bi-name="right-rail-recommendation-item-0">
+						ASP.NET Core Middleware
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn about ASP.NET Core middleware and the request pipeline.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative ">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/middleware?source=recommendations" data-bi-name="right-rail-recommendation-item-1">
+						Response Caching Middleware in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how to configure and use Response Caching Middleware in ASP.NET Core.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative ">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?source=recommendations" data-bi-name="right-rail-recommendation-item-2">
+						Filters in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how filters work and how to use them in ASP.NET Core.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?source=recommendations" data-bi-name="right-rail-recommendation-item-3">
+						Handle errors in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Discover how to handle errors in ASP.NET Core apps.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?source=recommendations" data-bi-name="right-rail-recommendation-item-4">
+						Rate limiting middleware in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how limit requests in ASP.NET Core apps
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors?source=recommendations" data-bi-name="right-rail-recommendation-item-5">
+						Handle errors in ASP.NET Core web APIs
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn about error handling with ASP.NET Core web APIs.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/request-response?source=recommendations" data-bi-name="right-rail-recommendation-item-6">
+						Request and Response operations in ASP.NET Core
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Learn how to read the request body and write the response body in ASP.NET Core.
+		</p>
+	
+					</li>
+				<!---->
+					<li class="padding-none margin-top-sm margin-bottom-none position-relative expandable">
+						  
+				<p class="line-clamp-3">
+					<a class="display-block inner-focus font-weight-semibold font-size-sm has-line-height-reset stretched-link" href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters?source=recommendations" data-bi-name="right-rail-recommendation-item-7">
+						Filters in Minimal API apps
+					</a>
+				</p>
+		   
+						
+		<p class="font-size-sm has-line-height-reset color-text-subtle margin-top-xxs line-clamp-3">
+			Use filters in Minimal API apps
+		</p>
+	
+					</li>
+				<!---->
+		</ul>
+	
+			</div>
+			<!---->
+				
+		<button type="button" aria-expanded="false" data-show-more="" class="link-button font-weight-semibold font-size-sm margin-top-sm" aria-controls="right-rail-recommendations-list-1" data-title="Show 5 more" data-bi-name="show-more-btn">
+			<span class="show-more-text "><!---->Show 5 more<!----></span>
+			
+		</button>
+	
+		  <!---->
+		</article>
+	<!----></section>
+								<nav id="side-doc-outline" class="doc-outline" data-bi-name="intopic toc" role="navigation" aria-label="In this article">
+									<h3>In this article</h3>
+								</nav>
+								<section id="right-rail-qna" class="margin-top-xxs" data-bi-name="qna-link-card" hidden=""></section>
+							</div>
+						</div>
+
+				</div>
+				<!--end of div.columns -->
+
+			</section>
+			<!--end of .primary-holder -->
+
+			<!-- interactive container -->
+			<aside id="interactive-container" class="interactive-container is-visible-interactive column has-body-background-dark ">
+			</aside>
+			<!-- end of interactive container -->
+		</div>
+
+	</div>
+	<!--end of .mainContainer -->
+
+	<section class="border-top has-default-focus is-hidden-interactive margin-top-sm ">
+
+
+
+	<footer id="footer" data-bi-name="footer" class="footer-layout uhf-container has-padding" role="contentinfo">
+	<div class="display-flex gap-xs flex-wrap-wrap is-full-height padding-right-lg-desktop">
+			<a data-mscc-ic="false" class="locale-selector-link button button-sm button-clear flex-shrink-0" href="https://learn.microsoft.com/en-us/locale?target=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Faspnet%2Fcore%2Ffundamentals%2Fmiddleware%2Fwrite%3Fview%3Daspnetcore-8.0" data-bi-name="select-locale" aria-label="Content language selector. Currently set to English (United States).">
+					<span class="icon" aria-hidden="true">
+						<span class="docon docon-world"></span>
+					</span>
+					<span class="local-selector-link-text">English (United States)</span></a>
+		<div class="flex-shrink-0">
+<div class="dropdown has-caret-up">
+	<button class="dropdown-trigger button button-clear button-sm has-inner-focus theme-dropdown-trigger" aria-controls="theme-menu" aria-expanded="false" title="Theme" data-bi-name="theme">
+		<span class="icon">
+			<span class="docon docon-sun" aria-hidden="true"></span>
+		</span>
+		<span>Theme</span>
+		<span class="icon expanded-indicator" aria-hidden="true">
+			<span class="docon docon-chevron-down-light"></span>
+		</span>
+	</button>
+	<div class="dropdown-menu" id="theme-menu" role="menu">
+		<ul class="theme-selector padding-xxs" role="none">
+			<li class="theme display-block" role="menuitem">
+				<button class="button button-clear button-sm theme-control button-block justify-content-flex-start is-selected" data-theme-to="light" aria-pressed="true">
+					<span class="theme-light margin-right-xxs">
+						<span class="theme-selector-icon css-variable-support border display-inline-block has-body-background" aria-hidden="true">
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rect>
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rect>
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect>
+								<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"></rect>
+								<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"></rect>
+							</svg>
+						</span>
+					</span>
+					<span>
+Light					</span>
+				</button>
+			</li>
+			<li class="theme display-block" role="menuitem">
+				<button class="button button-clear button-sm theme-control button-block justify-content-flex-start" data-theme-to="dark" aria-pressed="false">
+					<span class="theme-dark margin-right-xxs">
+						<span class="border theme-selector-icon css-variable-support display-inline-block has-body-background" aria-hidden="true">
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rect>
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rect>
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect>
+								<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"></rect>
+								<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"></rect>
+							</svg>
+						</span>
+					</span>
+					<span>
+Dark					</span>
+				</button>
+			</li>
+			<li class="theme display-block" role="menuitem">
+				<button class="button button-clear button-sm theme-control button-block justify-content-flex-start" data-theme-to="high-contrast" aria-pressed="false">
+					<span class="theme-high-contrast margin-right-xxs">
+						<span class="border theme-selector-icon css-variable-support display-inline-block has-body-background" aria-hidden="true">
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+								<rect width="22" height="14" class="has-fill-body-background"></rect>
+								<rect x="5" y="5" width="12" height="4" class="has-fill-secondary"></rect>
+								<rect x="5" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="8" y="2" width="2" height="1" class="has-fill-secondary"></rect>
+								<rect x="11" y="2" width="3" height="1" class="has-fill-secondary"></rect>
+								<rect x="1" y="1" width="2" height="2" class="has-fill-secondary"></rect>
+								<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary"></rect>
+								<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary"></rect>
+							</svg>
+						</span>
+					</span>
+					<span>
+High contrast					</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>
+		</div>
+	</div>
+	<ul class="links" data-bi-name="footerlinks">
+		<li class="manage-cookies-holder" hidden=""></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://learn.microsoft.com/en-us/previous-versions/" data-bi-name="archivelink">Previous Versions</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://techcommunity.microsoft.com/t5/microsoft-learn-blog/bg-p/MicrosoftLearnBlog" data-bi-name="bloglink">Blog</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://learn.microsoft.com/en-us/contribute/" data-bi-name="contributorGuide">Contribute</a></li>
+					<li><a class="external-link-indicator" data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?LinkId=521839" data-bi-name="privacy">Privacy</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://learn.microsoft.com/en-us/legal/termsofuse" data-bi-name="termsofuse">Terms of Use</a></li>
+				<li><a class="external-link-indicator" data-mscc-ic="false" href="https://www.microsoft.com/legal/intellectualproperty/Trademarks/" data-bi-name="trademarks">Trademarks</a></li>
+		<li>© Microsoft 2023</li>
+	</ul>
+</footer>
+	</section>
+
+	<div id="action-panel" role="region" aria-label="Action Panel" class="action-panel has-default-focus" tabindex="-1"></div>
+
+
+<script src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/at.js.download" async="" defer="" integrity="sha384-1/viVM50hgc33O2gOgkWz3EjiD/Fy/ld1dKYXJRUyjNYVEjSUGcSN+iPiQF7e4cu" crossorigin="anonymous"></script><iframe id="nativ-iframe" name="nativ" scrolling="no" frameborder="none" class="close-iframe" src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/page.html" style="height: 88%; width: 0px; min-width: 0px; position: fixed; top: 50px; right: auto; border-radius: 40px; z-index: 2147483647; transition: all 400ms ease-out 0s; left: 20px;"></iframe><iframe id="toggle-iframe" src="./Write custom ASP.NET Core middleware _ Microsoft Learn_files/toggle.html" style="position: fixed; top: 50%; background: none; height: 80px; width: 35px; border: none; z-index: 2147483647; left: 0px;"></iframe></body></html>

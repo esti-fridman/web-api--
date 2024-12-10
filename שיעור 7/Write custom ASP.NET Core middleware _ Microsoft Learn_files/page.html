@@ -1,0 +1,354 @@
+
+<!-- saved from url=(0061)chrome-extension://akakmkbdloafcokidpknkigklgolnimm/page.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script src="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/js/jquery-3.4.1.min.js"></script>
+<script src="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/js/bootstrap.bundle.min.js"></script>
+<script src="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/js/bootstrap.min.js"></script>
+<script src="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/page.js"></script>
+
+
+    <link href="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/css/bootstrap-reboot.min.css" rel="stylesheet" media="screen">
+    <link href="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/css/bootstrap-grid.min.css" rel="stylesheet" media="screen">
+    <link href="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/css/custom.css" rel="stylesheet" media="screen">
+    <link href="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/css/all.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body style="background: none;">
+    <!--<base target="_parent">--><base href="." target="_parent">
+    <div id="container" class="container">
+        <div class="wrapper">
+            <div class="row to-disable row-to-disable">
+                <div class="col-2 close-div">
+                    <div id="definitions-div" class="d-none">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a id="sideDefinition" class="dropdown-item">&#1492;&#1494;&#1494; &#1505;&#1512;&#1490;&#1500; &#1500;&#1497;&#1502;&#1497;&#1503;/&#1513;&#1502;&#1488;&#1500;</a>
+                                <!-- <a id="sideDefinitionUpDown" class="dropdown-item">&#1492;&#1494;&#1494; &#1505;&#1512;&#1490;&#1500; &#1500;&#1500;&#1502;&#1506;&#1500;&#1492;/&#1500;&#1502;&#1496;&#1492;</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 close-div">
+                    <a id="close-btn">&#1505;&#1490;&#1493;&#1512;</a>
+                </div>
+            </div>
+            <div class="row to-disable row-to-disable ">
+                <!-- <div id="definitions-div" class="col-3 text-left d-none">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-expanded="true">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a id="sideDefinition" class="dropdown-item">&#1492;&#1494;&#1494; &#1505;&#1512;&#1490;&#1500; &#1500;&#1497;&#1502;&#1497;&#1503;/&#1513;&#1502;&#1488;&#1500;</a>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-3 text-right d-none">
+                    <div id="version-header" class="d-none">4.5.16.12</div>
+                </div>
+                <div class="col-3 text-right d-none">
+                    <div id="username-header" class="d-none">topgroup3</div>
+                </div>
+            </div>
+            <div class="row to-disable row-to-disable">
+                <div class="col-12 text-center">
+                    <a id="iframe-logo" class="logo-bg">
+                        <img class="img-logo" src="chrome-extension://akakmkbdloafcokidpknkigklgolnimm/images/nativ-logo.png">
+                    </a>
+                </div>
+            </div>
+            <div class="row text-center">
+
+                <div class="col-12 to-disable col-to-disable">
+                    <div class="row">
+                        <div class="col-11 text-center">
+                            <div id="loading" class="spinner-border d-none" role="status">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div id="error-alert" class="alert alert-danger fade show d-none" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div id="success-alert" class="alert alert-success fade show d-none" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button id="requestSiteBtn" class="btn btn-no-icon">
+                                <div>&#1489;&#1511;&#1513;&#1514; &#1492;&#1488;&#1514;&#1512;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row"></div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="statusBtn" class="btn icon-btn">
+                                <!-- <i class="fa fa-map-marker fa-2x"></i> -->
+                                <div>&#1505;&#1496;&#1496;&#1493;&#1505; <br> &#1489;&#1511;&#1513;&#1493;&#1514; <br> &#1488;&#1514;&#1512;&#1497;&#1501;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <div class="col">
+                            <button id="recordBtn"
+                                onclick="top.window.location.href='https://www.enativ.com/record.aspx'"
+                                class="btn icon-btn">
+                                <i class="fa fa-microphone fa-2x"></i>
+                                <div>&#1492;&#1511;&#1500;&#1496;&#1514; &#1490;&#1500;&#1497;&#1513;&#1492;</div>
+                            </button>
+                        </div> -->
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="unfitContentBtn" class="btn icon-btn" data-toggle="modal" data-target="#unfitContentModal">
+                                <!-- <i class='fa fa-hand-paper fa-2x'></i> -->
+                                <div>&#1491;&#1493;&#1493;&#1495; &#1506;&#1500; &#1514;&#1493;&#1499;&#1503; &#1489;&#1500;&#1514;&#1497; &#1512;&#1488;&#1493;&#1497;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="removeSiteBtn" data-toggle="modal" data-target="#removeSiteModal" class="btn icon-btn" data-id="">
+                                <!-- <i class="fa fa-minus-circle fa-2x"></i> -->
+                                <div>&#1492;&#1505;&#1512;&#1514; <br> &#1488;&#1514;&#1512;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="contactBtn" class="btn icon-btn" data-toggle="modal" data-target="#contactModal" data-id="">
+                                <!-- <i class="fa fa-envelope fa-2x"></i> -->
+                                <div>&#1513;&#1500;&#1497;&#1495;&#1514; <br> &#1508;&#1504;&#1497;&#1492;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="changeUserBtn" class="btn icon-btn" data-toggle="modal" data-target="#changeUserModal">
+                                <!-- <i class="fas fa-user-friends fa-2x"></i> -->
+                                <div>&#1492;&#1495;&#1500;&#1508;&#1514; <br> &#1502;&#1513;&#1514;&#1502;&#1513;</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button id="refreshBtn" class="btn btn-no-icon mt-first">
+                                <div>&#1512;&#1506;&#1504;&#1493;&#1503; &#1492;&#1490;&#1491;&#1512;&#1493;&#1514;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button id="loginBtn" class="btn btn-no-icon d-none" data-target="#changeUserModal" data-toggle="modal">
+                                <div>&#1492;&#1514;&#1495;&#1489;&#1512;&#1493;&#1514;</div>
+                            </button>
+                            <button id="loginLogoutBtn" class="btn btn-no-icon bg-gray">
+                                <div>&#1492;&#1514;&#1504;&#1514;&#1511;&#1493;&#1514;</div>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-12">
+                            <button id="logoutBtn" class="btn icon-btn">
+                                <i class="fa fa-power-off fa-2x"></i>
+                                <div>&#1504;&#1506;&#1497;&#1500;&#1514; </br> &#1502;&#1513;&#1514;&#1502;&#1513;</div>
+                            </button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal contact  -->
+    <div id="contactModal" class="modal fade to-disable" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h8 class="modal-title title-margin1 font-weight-bold">&#1513;&#1500;&#1497;&#1495;&#1514; &#1508;&#1504;&#1497;&#1492;</h8>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <label for="departments">&#1489;&#1495;&#1497;&#1512;&#1514; &#1502;&#1495;&#1500;&#1511;&#1492;</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 field-input">
+                                <select id="departments">
+                                    <option value="1">&#1504;&#1514;&#1497;&#1489; &#1514;&#1502;&#1497;&#1499;&#1492; &#1496;&#1499;&#1504;&#1497;&#1514;</option>
+                                    <option value="17">&#1504;&#1514;&#1497;&#1489; &#1488;&#1514;&#1512;&#1497;&#1501;</option>
+                                    <option value="3">&#1504;&#1514;&#1497;&#1489; &#1502;&#1499;&#1497;&#1512;&#1493;&#1514;</option>
+                                    <option value="5">&#1504;&#1514;&#1497;&#1489; &#1492;&#1504;&#1492;&#1500;&#1514; &#1495;&#1513;&#1489;&#1493;&#1504;&#1493;&#1514;</option>
+                                    <option value="99">&#1491;&#1497;&#1493;&#1493;&#1495; &#1506;&#1500; &#1514;&#1493;&#1499;&#1503; &#1489;&#1506;&#1497;&#1497;&#1514;&#1497;</option>
+                                    <option value="100">&#1491;&#1497;&#1493;&#1493;&#1495; &#1506;&#1500; &#1508;&#1497;&#1512;&#1510;&#1492; &#1495;&#1502;&#1493;&#1512;&#1492;!</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right field">
+                            <label>
+                                &#1514;&#1493;&#1499;&#1503; &#1492;&#1508;&#1504;&#1497;&#1492;
+                        </label></div>
+                        <div class="row">
+                            <div class="col-12 field-input">
+                                <textarea id="cantactText"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="contactSubmitBtn" class="btn btn-no-icon submitBtn">&#1513;&#1500;&#1495;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!-- modal remove site -->
+    <div id="removeSiteModal" class="modal fade to-disable" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h8 class="modal-title title-margin font-weight-bold">&#1492;&#1505;&#1512;&#1514; &#1488;&#1514;&#1512;</h8>
+                </div>
+                <div class="modal-body contact-modal">
+                    <div class="text-right">
+                        &#1502;&#1506;&#1493;&#1504;&#1497;&#1503; &#1500;&#1495;&#1505;&#1493;&#1501; &#1488;&#1514;:
+                    </div>
+                    <div class="custom-control custom-radio rem-site">
+                        <input type="radio" class="custom-control-input" id="onePage" name="sites">
+                        <label class="custom-control-label text-to-right1" for="onePage" value="onePage">&#1492;&#1491;&#1507; &#1489;&#1493; &#1488;&#1504;&#1497; &#1504;&#1502;&#1510;&#1488;</label>
+                    </div>
+                    <div class="custom-control custom-radio rem-site">
+                        <input type="radio" class="custom-control-input" id="allSite" name="sites">
+                        <label class="custom-control-label text-to-right2" for="allSite" value="allSite">&#1499;&#1500; &#1492;&#1488;&#1514;&#1512;</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="removeSubmitBtn" class="btn btn-no-icon submitBtn disabled">&#1513;&#1500;&#1495;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!-- modal change user -->
+    <div id="changeUserModal" class="modal fade to-disable" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="header-logo">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h8 class="modal-title title-margin font-weight-bold">&#1492;&#1495;&#1500;&#1508;&#1514; &#1502;&#1513;&#1514;&#1502;&#1513;</h8>
+                </div>
+                <div class="modal-body">
+                    <div class="center-div" id="center-div">
+                        <p id="currentusermessage"> </p>
+                        <form id="loginForm" method="post" accept-charset="UTF-8" style="display: block;">
+
+                            <div id="loginFields">
+                                <div class="input-icons">
+                                    <!-- <i class="fa fa-user icon">
+                                    </i> -->
+                                    <input id="username" class="input-field he" type="text" name="username" placeholder="&#1513;&#1501; &#1502;&#1513;&#1514;&#1502;&#1513;" [(ngmodel)]="username">
+                                </div>
+                                <div class="input-icons">
+                                    <!-- <i class="fa fa-lock icon">
+                                    </i> -->
+                                    <input id="password" class="input-field he" type="password" name="password" placeholder="&#1505;&#1497;&#1505;&#1502;&#1492;" maxlength="50" [(ngmodel)]="password">
+                                </div>
+                            </div>
+                            <input id="changeUserSubmit" value="&#1499;&#1504;&#1497;&#1505;&#1492;" class="he btn-no-icon text-center">
+                            <input id="login-logout" value="&#1497;&#1510;&#1497;&#1488;&#1492;" class="he btn-no-icon text-center d-none">
+                        </form>
+                        <div id="progressBorder" style="display:none">
+                            <div id="progress"></div>
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!-- modal unfit content -->
+    <div id="unfitContentModal" class="modal fade to-disable" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h8 class="modal-title font-weight-bold">&#1491;&#1493;&#1493;&#1495; &#1506;&#1500; &#1514;&#1493;&#1499;&#1503; &#1489;&#1500;&#1514;&#1497; &#1512;&#1488;&#1493;&#1497;</h8>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col text-right">
+                            <label>&#1492;&#1506;&#1512;&#1493;&#1514;:</label>
+                        </div>
+                        <div class="col text-right">
+                            <textarea id="unfitContentTxt" type="text"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="unfitContentSubmitBtn" class="btn btn-no-icon submitBtn">&#1513;&#1500;&#1495;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <!-- modal add site -->
+    <div id="addSiteModal" class="modal fade to-disable" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="header-logo">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h8 class="modal-title title-margin font-weight-bold">&#1505;&#1497;&#1505;&#1502;&#1514; &#1492;&#1493;&#1505;&#1508;&#1514; &#1488;&#1514;&#1512;&#1497;&#1501;</h8>
+                </div>
+                <div class="modal-body">
+                    <div class="center-div" id="center-div">
+                        <p id="currentusermessage"> </p>
+                        <form id="loginForm" method="post" accept-charset="UTF-8" style="display: block;">
+                            <div id="loginFields">
+                                <div class="input-icons">
+                                    <i class="fa fa-lock icon">
+                                    </i>
+                                    <input id="addSitePass" class="input-field he" type="password" name="password" placeholder="&#1505;&#1497;&#1505;&#1502;&#1492;" maxlength="50" [(ngmodel)]="password">
+                                </div>
+                            </div>
+                            <input id="addSitePassSubmitBtn" value="&#1488;&#1497;&#1513;&#1493;&#1512;" class="he btn-no-icon text-center">
+                        </form>
+                        <div id="errorMsg">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+
+</body></html>
